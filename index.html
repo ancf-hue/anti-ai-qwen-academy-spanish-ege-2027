@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anti-AI Qwen Academy | Испанский язык ЕГЭ-2027</title>
+<meta name="description" content="Офлайн-тренажёр ЕГЭ-2027 по испанскому языку: 38 письменных + 4 устных задания, 82 первичных балла, 190 минут, структура ФИПИ." />
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<style>
+  * { box-sizing: border-box; }
+  :root {
+    --bg: #070b18;
+    --card: rgba(18, 26, 51, 0.72);
+    --card-soft: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.1);
+    --text: #e8ecff;
+    --muted: #9aa4c8;
+    --accent: #22d3ee;
+    --violet: #7c3aed;
+    --green: #22c55e;
+    --red: #ef4444;
+    --orange: #f59e0b;
+  }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background:
+      radial-gradient(circle at top left, rgba(124, 58, 237, 0.22), transparent 30%),
+      radial-gradient(circle at top right, rgba(34, 211, 238, 0.18), transparent 28%),
+      var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+  .container { width: min(1120px, 92%); margin: 0 auto; }
+  header {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px);
+    background: rgba(7, 11, 24, 0.82);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-logo {
+    width: 46px; height: 46px; border-radius: 15px; object-fit: cover;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 12px 30px rgba(34, 211, 238, 0.18);
+    flex: 0 0 auto;
+  }
+  .brand strong { display: block; font-size: 16px; line-height: 1.2; }
+  .brand small { color: var(--muted); font-size: 12px; }
+  nav { display: flex; gap: 18px; flex-wrap: wrap; }
+  nav a { color: #cfd6ff; text-decoration: none; font-weight: 700; font-size: 14px; }
+  nav a:hover { color: white; }
+  .top-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-left: auto; }
+
+  .lang-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--muted); border-radius: 999px; padding: 8px 12px;
+    font-weight: 850; cursor: pointer; transition: 0.15s ease;
+    font-size: 13px;
+  }
+  .lang-btn:hover { background: rgba(255, 255, 255, 0.12); }
+  .lang-option { opacity: 0.65; }
+  .lang-option.active { opacity: 1; color: white; }
+  .lang-sep { opacity: 0.45; }
+
+  .timer-widget {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px; padding: 6px 8px;
+  }
+  .timer-widget select {
+    background: rgba(7, 11, 24, 0.55); color: var(--text);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px; padding: 6px 8px; font: inherit;
+    font-size: 12px; max-width: 200px;
+  }
+  #timerDisplay {
+    font-variant-numeric: tabular-nums; font-weight: 900;
+    min-width: 88px; text-align: center; color: white;
+  }
+  .timer-btn {
+    border: 0; background: rgba(255, 255, 255, 0.08); color: var(--text);
+    border-radius: 10px; padding: 6px 9px; cursor: pointer;
+    font-size: 14px; transition: 0.15s ease;
+  }
+  .timer-btn:hover { background: rgba(255, 255, 255, 0.14); }
+  .timer-widget.warning #timerDisplay { color: var(--orange); }
+  .timer-widget.danger #timerDisplay { color: var(--red); animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+
+  .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px; padding: 48px 0 28px; align-items: start; }
+  .badge {
+    display: inline-flex; align-items: center;
+    padding: 8px 12px; border-radius: 999px;
+    background: rgba(124, 58, 237, 0.18);
+    border: 1px solid rgba(124, 58, 237, 0.35);
+    color: #d8ccff; font-size: 13px; font-weight: 700;
+  }
+  h1 { font-size: clamp(34px, 5vw, 58px); line-height: 1.05; margin: 16px 0; }
+  h1 .accent { color: var(--accent); }
+  .lead { color: #b8c1e6; max-width: 72ch; font-size: 17px; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+  .btn {
+    border: 0; border-radius: 14px; padding: 14px 18px;
+    font-weight: 850; cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    background: linear-gradient(135deg, var(--violet), var(--accent));
+    color: white; box-shadow: 0 12px 30px rgba(34, 211, 238, 0.18);
+    font-size: 15px;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.secondary { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); color: #eaf0ff; box-shadow: none; }
+  .btn.small { padding: 10px 14px; font-size: 14px; border-radius: 12px; }
+  .panel {
+    background: linear-gradient(180deg, rgba(124, 58, 237, 0.16), rgba(6, 182, 212, 0.10));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px; padding: 22px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  }
+  .panel h3 { margin: 0 0 14px; font-size: 20px; }
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0; }
+  .metric {
+    background: rgba(7, 11, 24, 0.35); border-radius: 16px;
+    padding: 14px; border: 1px solid rgba(255, 255, 255, 0.08);
+    min-height: 82px;
+  }
+  .metric strong { display: block; font-size: 22px; color: white; margin-bottom: 4px; }
+  .metric span { color: var(--muted); font-size: 12px; }
+  progress {
+    width: 100%; height: 10px; border-radius: 999px;
+    overflow: hidden; appearance: none;
+    background: rgba(255, 255, 255, 0.1); border: none; margin-top: 10px;
+  }
+  progress::-webkit-progress-bar { background: rgba(255, 255, 255, 0.1); border-radius: 999px; }
+  progress::-webkit-progress-value { background: linear-gradient(90deg, var(--violet), var(--accent)); border-radius: 999px; }
+  progress::-moz-progress-bar { background: var(--accent); border-radius: 999px; }
+  .note { color: var(--muted); font-size: 13px; margin-top: 12px; }
+
+  section { padding: 28px 0; }
+  .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+  h2 { font-size: clamp(26px, 3vw, 36px); margin: 0; line-height: 1.15; }
+  .sub { color: var(--muted); margin: 6px 0 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--card); border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 22px; padding: 20px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  }
+  .card h3 { margin: 0 0 10px; font-size: 20px; }
+  .card p { color: #b8c1e6; margin: 0 0 16px; }
+  .warn-card { border-color: rgba(245, 158, 11, 0.35); background: linear-gradient(180deg, rgba(245, 158, 11, 0.10), rgba(18, 26, 51, 0.72)); }
+  .danger-card { border-color: rgba(239, 68, 68, 0.35); background: linear-gradient(180deg, rgba(239, 68, 68, 0.10), rgba(18, 26, 51, 0.72)); }
+  .success-card { border-color: rgba(34, 197, 94, 0.35); background: linear-gradient(180deg, rgba(34, 197, 94, 0.10), rgba(18, 26, 51, 0.72)); }
+  .tag {
+    display: inline-block; padding: 6px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 850; margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #dbe3ff;
+  }
+  .tag.red { background: rgba(239, 68, 68, 0.14); border-color: rgba(239, 68, 68, 0.35); color: #ffd7d7; }
+  .tag.green { background: rgba(34, 197, 94, 0.14); border-color: rgba(34, 197, 94, 0.35); color: #d7ffe6; }
+  .tag.orange { background: rgba(245, 158, 11, 0.14); border-color: rgba(245, 158, 11, 0.35); color: #fff0cc; }
+  .mini-list { margin: 0; padding-left: 18px; color: #c8d2f5; }
+  .mini-list li { margin: 7px 0; }
+
+  .filter-bar {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; padding: 14px;
+    background: var(--card-soft); border: 1px solid var(--border); border-radius: 16px; align-items: center;
+  }
+  .filter-bar span { color: var(--muted); font-size: 13px; font-weight: 700; margin-right: 6px; }
+  .filter-btn {
+    padding: 8px 14px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06); color: var(--text); cursor: pointer; font-size: 13px; font-weight: 700; transition: 0.15s ease;
+  }
+  .filter-btn:hover { background: rgba(255, 255, 255, 0.1); }
+  .filter-btn.active { background: linear-gradient(135deg, var(--violet), var(--accent)); border-color: transparent; color: white; }
+
+  .question-block {
+    background: var(--card); border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 24px; padding: 24px; margin-bottom: 26px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+  }
+  .q-number {
+    display: inline-block; padding: 6px 12px; border-radius: 999px;
+    background: rgba(124, 58, 237, 0.22);
+    border: 1px solid rgba(124, 58, 237, 0.45);
+    color: #d8ccff; font-size: 13px; font-weight: 850; margin-bottom: 14px;
+  }
+  .q-number.listen { background: rgba(34, 197, 94, 0.20); border-color: rgba(34, 197, 94, 0.45); color: #d7ffe6; }
+  .q-number.read { background: rgba(245, 158, 11, 0.20); border-color: rgba(245, 158, 11, 0.45); color: #fff0cc; }
+  .q-number.gram { background: rgba(239, 68, 68, 0.20); border-color: rgba(239, 68, 68, 0.45); color: #ffd7d7; }
+  .q-number.write { background: rgba(124, 58, 237, 0.22); border-color: rgba(124, 58, 237, 0.45); color: #d8ccff; }
+  .q-number.speak { background: rgba(34, 211, 238, 0.20); border-color: rgba(34, 211, 238, 0.45); color: #cdeeff; }
+  .q-part { margin-bottom: 18px; }
+  .q-part-label {
+    display: inline-block; font-size: 12px; font-weight: 900;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .q-text {
+    font-size: 17px; font-weight: 700; margin: 0;
+    line-height: 1.5; color: #eaf0ff; white-space: pre-wrap;
+  }
+  .q-info {
+    background: rgba(124, 58, 237, 0.10);
+    border-left: 4px solid var(--violet);
+    border-radius: 0 14px 14px 0;
+    padding: 16px 18px; margin: 18px 0;
+    color: #dbe3ff; font-size: 15px; line-height: 1.55; white-space: pre-wrap;
+  }
+  .q-info strong { color: #ffffff; }
+  .q-base {
+    margin: 14px 0 18px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .q-base summary {
+    cursor: pointer;
+    padding: 12px 16px;
+    font-weight: 900;
+    color: var(--accent);
+    background: rgba(34,211,238,0.08);
+  }
+  .q-base-content {
+    padding: 16px;
+    white-space: pre-wrap;
+    color: #dbe3ff;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .answer-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .answer-input {
+    flex: 1; min-width: 220px;
+    background: rgba(7, 11, 24, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: var(--text); border-radius: 14px;
+    padding: 14px 16px; font: inherit; font-size: 16px;
+  }
+  .answer-input:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
+  }
+  .answer-input.correct { border-color: rgba(34, 197, 94, 0.65); background: rgba(34, 197, 94, 0.12); }
+  .answer-input.wrong { border-color: rgba(239, 68, 68, 0.65); background: rgba(239, 68, 68, 0.12); }
+  .answer-input.partial { border-color: rgba(245, 158, 11, 0.65); background: rgba(245, 158, 11, 0.12); }
+  textarea.answer-input { min-height: 140px; resize: vertical; font-family: inherit; line-height: 1.5; }
+  textarea.answer-input.essay { min-height: 220px; }
+
+  .match-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px; padding: 16px; margin: 14px 0;
+    font-size: 14px;
+  }
+  .match-grid h4 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--accent); margin: 0 0 8px;
+  }
+  .match-grid ul { list-style: none; padding: 0; margin: 0; }
+  .match-grid li { margin: 6px 0; }
+  .match-grid li b { color: var(--violet); }
+  @media (max-width: 640px) { .match-grid { grid-template-columns: 1fr; } }
+
+  .audio-section {
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.10), rgba(18, 26, 51, 0.72));
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    border-radius: 24px; padding: 22px 24px;
+    margin-bottom: 26px; box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+  }
+  .audio-section.oral {
+    background: linear-gradient(180deg, rgba(124, 58, 237, 0.14), rgba(18, 26, 51, 0.72));
+    border-color: rgba(124, 58, 237, 0.5);
+  }
+  .audio-section-tag {
+    display: inline-block; padding: 6px 12px; border-radius: 999px;
+    background: rgba(34, 197, 94, 0.18); border: 1px solid rgba(34, 197, 94, 0.5);
+    color: #d7ffe6; font-size: 12px; font-weight: 850; margin-bottom: 10px;
+  }
+  .audio-section.oral .audio-section-tag {
+    background: rgba(124, 58, 237, 0.22); border-color: rgba(124, 58, 237, 0.55); color: #d8ccff;
+  }
+  .audio-section-title { margin: 0 0 8px; font-size: 20px; color: #ffffff; }
+  .audio-section-note { margin: 0; color: #cdeeff; font-size: 14px; line-height: 1.6; }
+  .audio-section-note strong { color: #ffffff; }
+  .audio-section-note code { background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 6px; color: #fff; font-family: monospace; font-size: 13px; }
+  .q-audio { margin: 14px 0; padding: 14px; background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.35); border-radius: 14px; }
+  .q-audio audio { width: 100%; display: block; }
+  .audio-error { color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 14px; display: none; }
+  .audio-error code { background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; }
+
+  .result-block { margin-top: 14px; padding: 14px 16px; border-radius: 14px; }
+  .result-block.correct { background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.35); }
+  .result-block.wrong { background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); }
+  .result-block.partial { background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); }
+  .verdict { font-size: 17px; font-weight: 900; margin-bottom: 8px; }
+  .verdict.correct { color: #22c55e; }
+  .verdict.wrong { color: #ef4444; }
+  .verdict.partial { color: var(--orange); }
+  .result-row { margin: 6px 0; color: #d7e6ff; font-size: 15px; white-space: pre-wrap; }
+  .result-row strong { color: #ffffff; }
+  .source-row {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.18);
+    color: var(--muted); font-size: 13px;
+    white-space: pre-wrap;
+  }
+  .source-row strong { color: #dbe3ff; }
+  .summary {
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.14), rgba(18, 26, 51, 0.72));
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    border-radius: 24px; padding: 24px; text-align: center; margin-top: 24px;
+  }
+  .summary .score { font-size: 48px; font-weight: 950; color: #fff; }
+  .reset-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; justify-content: flex-end; }
+
+  .checklist { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .check-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--card-soft); border: 1px solid var(--border);
+    border-radius: 16px; padding: 14px; transition: 0.15s ease;
+  }
+  .check-item input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--accent); flex: 0 0 auto; }
+  .check-item label { cursor: pointer; color: #dbe3ff; }
+  .check-item.done { opacity: 0.72; background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.25); }
+  .check-item.done label { text-decoration: line-through; color: #aab5dc; }
+
+  .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .day {
+    background: var(--card-soft); border: 1px solid var(--border);
+    border-radius: 18px; padding: 16px; min-height: 112px;
+  }
+  .day b { display: block; color: var(--accent); margin-bottom: 6px; font-size: 14px; letter-spacing: 0.2px; }
+  .day.critical { border-color: rgba(239, 68, 68, 0.35); background: rgba(239, 68, 68, 0.08); }
+
+  .support-card {
+    background: linear-gradient(180deg, rgba(124, 58, 237, 0.18), rgba(34, 211, 238, 0.10));
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 24px; padding: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  }
+  .support-card h2 { margin-bottom: 10px; }
+  .support-card p { margin: 10px 0; color: #dbe3ff; }
+  .phone { color: white; font-weight: 900; text-decoration: none; border-bottom: 1px dashed rgba(255, 255, 255, 0.45); }
+  .phone:hover { color: var(--accent); }
+  .copy-status { margin-left: 8px; color: var(--green); font-weight: 850; }
+  .support-card a { color: var(--accent); font-weight: 800; text-decoration: none; }
+  .support-card a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 30px 0 50px; color: var(--muted);
+    text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 30px;
+  }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .metrics { grid-template-columns: 1fr; }
+    nav { gap: 12px; }
+    .top-controls { width: 100%; justify-content: space-between; }
+    .timer-widget select { max-width: 150px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="container topbar">
+    <div class="brand">
+      <img src="favicon.ico" class="brand-logo" alt="Anti-AI Qwen Academy Logo" onerror="this.style.display='none'" />
+      <div>
+        <strong data-i18n="brandTitle">Анти-ИИ Квен Академия</strong>
+        <small data-i18n="brandSub">Испанский язык ЕГЭ-2027 · 42 задания · 82 балла</small>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#structure" data-i18n="navStructure">Структура</a>
+      <a href="#changes" data-i18n="navChanges">Изменения 2027</a>
+      <a href="#criteria" data-i18n="navCriteria">Оценивание</a>
+      <a href="#trainer" data-i18n="navTrainer">Тренажёр</a>
+      <a href="#checklist" data-i18n="navChecklist">Чек-лист</a>
+      <a href="#plan" data-i18n="navPlan">25 дней</a>
+      <a href="#support" data-i18n="navSupport">Поддержать</a>
+    </nav>
+
+    <div class="top-controls">
+      <button id="langToggle" class="lang-btn" type="button" aria-label="Switch Language">
+        <span class="lang-option active" data-lang="ru">RU</span>
+        <span class="lang-sep">/</span>
+        <span class="lang-option" data-lang="en">EN</span>
+      </button>
+
+      <div class="timer-widget" id="timerWidget" role="group" aria-label="Exam Timer">
+        <select id="timerPreset" aria-label="Timer Preset"></select>
+        <span id="timerDisplay">03:10:00</span>
+        <button id="timerToggle" class="timer-btn" type="button">▶</button>
+        <button id="timerReset" class="timer-btn" type="button">↺</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div>
+      <span class="badge" data-i18n="badge"></span>
+      <h1 data-i18n="h1"></h1>
+      <p class="lead" data-i18n="lead"></p>
+
+      <div class="actions">
+        <button class="btn" onclick="scrollToId('trainer')" data-i18n="actionTrainer">Пройти тренажёр</button>
+        <button class="btn secondary" onclick="scrollToId('structure')" data-i18n="actionStructure">Структура экзамена</button>
+        <button class="btn secondary" onclick="scrollToId('criteria')" data-i18n="actionCriteria">Критерии</button>
+      </div>
+    </div>
+
+    <aside class="panel">
+      <h3 data-i18n="quickStats">Быстрая статистика</h3>
+
+      <div class="metrics">
+        <div class="metric">
+          <strong id="answeredCount">0/42</strong>
+          <span data-i18n="metricBlocks">блоков пройдено</span>
+        </div>
+        <div class="metric">
+          <strong id="correctCount">0/42</strong>
+          <span data-i18n="metricCorrect">верных ответов</span>
+        </div>
+        <div class="metric">
+          <strong id="checklistProgress">0%</strong>
+          <span data-i18n="metricChecklist">чек-лист</span>
+        </div>
+      </div>
+
+      <progress id="overall" value="0" max="100"></progress>
+      <p class="note" data-i18n="noteReset"></p>
+    </aside>
+  </section>
+
+  <section id="structure">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="structureTitle">Структура ЕГЭ по испанскому языку</h2>
+        <p class="sub" data-i18n="structureSub"></p>
+      </div>
+    </div>
+    <div class="grid" id="structureGrid"></div>
+  </section>
+
+  <section id="changes">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="changesTitle">Что изменилось в ЕГЭ-2027</h2>
+        <p class="sub" data-i18n="changesSub"></p>
+      </div>
+    </div>
+    <div class="grid" id="changesGrid"></div>
+  </section>
+
+  <section id="criteria">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="criteriaTitle">Система оценивания</h2>
+        <p class="sub" data-i18n="criteriaSub"></p>
+      </div>
+    </div>
+    <div class="grid" id="criteriaGrid"></div>
+  </section>
+
+  <section id="trainer">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="trainerTitle">Тренажёр</h2>
+        <p class="sub" data-i18n="trainerSub"></p>
+      </div>
+    </div>
+
+    <div class="card success-card" style="margin-bottom:18px;">
+      <span class="tag green" data-i18n="statusTag">✅ Статус материалов</span>
+      <h3 data-i18n="statusTitle">Соответствие демоверсии ФИПИ 2027</h3>
+      <p data-i18n="statusText"></p>
+    </div>
+
+    <p class="note" data-i18n="trainerNote"></p>
+
+    <div class="filter-bar">
+      <span data-i18n="filterLabel">Показать:</span>
+      <button class="filter-btn active" id="filterAll" onclick="setFilter('all', this)"></button>
+      <button class="filter-btn" id="filterListen" onclick="setFilter('listen', this)"></button>
+      <button class="filter-btn" id="filterRead" onclick="setFilter('read', this)"></button>
+      <button class="filter-btn" id="filterGram" onclick="setFilter('gram', this)"></button>
+      <button class="filter-btn" id="filterWrite" onclick="setFilter('write', this)"></button>
+      <button class="filter-btn" id="filterSpeak" onclick="setFilter('speak', this)"></button>
+    </div>
+
+    <div class="reset-bar">
+      <button class="btn secondary small" onclick="resetAll()" data-i18n="resetAll">Сбросить все ответы</button>
+    </div>
+
+    <div id="quizContainer"></div>
+    <div id="summaryBox"></div>
+  </section>
+
+  <section id="checklist">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="checklistTitle">Чек-лист подготовки к ЕГЭ-2027</h2>
+        <p class="sub" data-i18n="checklistSub"></p>
+      </div>
+    </div>
+    <ul class="checklist" id="checklistUl"></ul>
+  </section>
+
+  <section id="plan">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="planTitle">Полный курс 25 дней</h2>
+        <p class="sub" data-i18n="planSub"></p>
+      </div>
+    </div>
+    <div class="plan-grid" id="planGrid"></div>
+  </section>
+
+  <section id="support">
+    <div class="support-card">
+      <h2 data-i18n="supportTitle">🤝 ПОДДЕРЖАТЬ ПРОЕКТ 💙</h2>
+      <p data-i18n="supportP1"></p>
+      <p data-i18n="supportP2"></p>
+      <p>
+        <span data-i18n="supportPhoneLabel"></span>
+        <a class="phone" href="tel:89202275676">8-920-227-56-76</a>
+        <button class="btn small" onclick="copyPhone()" data-i18n="copyPhone">📋 Копировать номер</button>
+        <span id="copyStatus" class="copy-status" aria-live="polite"></span>
+      </p>
+      <p data-i18n="supportP3"></p>
+      <p data-i18n="supportP4"></p>
+      <p><span data-i18n="supportCatalogBefore"></span> <a href="https://ancf-hue.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="supportCatalogLink"></a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container" data-i18n="footer"></div>
+</footer>
+
+<script>
+const TOTAL_TASKS = 42;
+const TOTAL_MAX_PRIMARY = 82;
+
+const WEIGHTS = {
+  1: 2, 2: 3, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1,
+  10: 3, 11: 2, 12: 1, 13: 1, 14: 1, 15: 1, 16: 1, 17: 1, 18: 1,
+  19: 1, 20: 1, 21: 1, 22: 1, 23: 1, 24: 1,
+  25: 1, 26: 1, 27: 1, 28: 1, 29: 1,
+  30: 1, 31: 1, 32: 1, 33: 1, 34: 1, 35: 1, 36: 1,
+  37: 6, 38: 14,
+  39: 1, 40: 4, 41: 5, 42: 10
+};
+
+const SCORING_TYPES = {
+  1: "strict-partial", 2: "strict-partial", 3: "word", 4: "word", 5: "word", 6: "word", 7: "word", 8: "word", 9: "word",
+  10: "strict-partial", 11: "strict-partial", 12: "word", 13: "word", 14: "word", 15: "word", 16: "word", 17: "word", 18: "word",
+  19: "word", 20: "word", 21: "word", 22: "word", 23: "word", 24: "word",
+  25: "word", 26: "word", 27: "word", 28: "word", 29: "word",
+  30: "word", 31: "word", 32: "word", 33: "word", 34: "word", 35: "word", 36: "word",
+  37: "part2", 38: "part2",
+  39: "part2", 40: "part2", 41: "part2", 42: "part2"
+};
+
+let currentLang = "ru";
+
+const I18N = {
+  ru: {
+    docTitle: "Anti-AI Qwen Academy | Испанский язык ЕГЭ-2027",
+    metaDesc: "Офлайн-тренажёр ЕГЭ-2027 по испанскому языку: 38 письменных + 4 устных задания, 82 первичных балла, 190 минут, структура ФИПИ.",
+    brandTitle: "Анти-ИИ Квен Академия",
+    brandSub: "Испанский язык ЕГЭ-2027 · 42 задания · 82 балла",
+    navStructure: "Структура",
+    navChanges: "Изменения 2027",
+    navCriteria: "Оценивание",
+    navTrainer: "Тренажёр",
+    navChecklist: "Чек-лист",
+    navPlan: "25 дней",
+    navSupport: "Поддержать",
+    badge: "ФИПИ 2027 · 42 задания · 82 первичных балла · 190 минут письменная часть + 17 минут устная",
+    h1: 'Поможем сдать <span class="accent">испанский язык</span> правильно',
+    lead: "Тренажёр составлен по спецификации, кодификатору и демоверсиям ЕГЭ-2027 по испанскому языку. Письменная часть: 38 заданий. Устная часть: 4 задания. Максимум — 82 первичных балла. Время: 190 минут на письменную часть и 17 минут на устную.",
+    actionTrainer: "Пройти тренажёр",
+    actionStructure: "Структура экзамена",
+    actionCriteria: "Критерии",
+    quickStats: "Быстрая статистика",
+    metricBlocks: "блоков пройдено",
+    metricCorrect: "верных ответов",
+    metricChecklist: "чек-лист",
+    noteReset: "Ответы и чек-лист сбрасываются при открытии страницы.",
+    structureTitle: "Структура ЕГЭ по испанскому языку",
+    structureSub: "38 письменных заданий + 4 устных. 82 первичных балла. 190 минут письменная часть + 17 минут устная часть.",
+    changesTitle: "Что изменилось в ЕГЭ-2027",
+    changesSub: "Изменения структуры и содержания КИМ по сравнению с 2026 годом отсутствуют.",
+    criteriaTitle: "Система оценивания",
+    criteriaSub: "Задания 3–9, 12–36 — 1 балл. Задание 1 — 2 балла. Задания 2 и 10 — 3 балла. Задание 11 — 2 балла. Задание 37 — 6 баллов. Задание 38 — 14 баллов. Устная часть: 1 + 4 + 5 + 10 = 20 баллов.",
+    trainerTitle: "Тренажёр: 38 письменных + 4 устных задания",
+    trainerSub: "Аудирование → чтение → грамматика и лексика → письменная речь → устная часть.",
+    statusTag: "✅ Статус материалов",
+    statusTitle: "Соответствие демоверсии ФИПИ 2027",
+    statusText: "Демоверсия письменной части ЕГЭ-2027 по испанскому языку опубликована. Тренажёр приведён в соответствие с официальной демоверсией и спецификацией ФИПИ. Для аудирования необходим файл audio-es.mp3, для устного задания 3 — audio-es-oral.mp3.",
+    trainerNote: "Для заданий 1–36 вводится цифра, слово или последовательность цифр. Для заданий 37–42 доступна приблизительная самопроверка; итоговый балл по развёрнутым ответам сверяйте с критериями ФИПИ.",
+    filterLabel: "Показать:",
+    filterAll: "Все",
+    filterListen: "Аудирование",
+    filterRead: "Чтение",
+    filterGram: "Грамматика",
+    filterWrite: "Письмо",
+    filterSpeak: "Устная часть",
+    resetAll: "Сбросить все ответы",
+    checklistTitle: "Чек-лист подготовки к ЕГЭ-2027",
+    checklistSub: "Отмечай выполненные пункты — при новом открытии страницы чек-лист сбросится.",
+    planTitle: "Полный курс 25 дней",
+    planSub: "Маршрут подготовки по структуре ЕГЭ-2027.",
+    supportTitle: "🤝 ПОДДЕРЖАТЬ ПРОЕКТ 💙",
+    supportP1: "<strong>Приложение бесплатное. Было и останется.</strong>",
+    supportP2: "Все приложения бесплатны и без рекламы. Ваша помощь помогает развитию офлайн-безопасности и образования.",
+    supportPhoneLabel: "📱 ПЕРЕВОД ПО НОМЕРУ ТЕЛЕФОНА:",
+    copyPhone: "📋 Копировать номер",
+    copied: "✓ Скопировано",
+    supportP3: "✅ Деньги придут мгновенно. Без комиссии. Безопасно.",
+    supportP4: "❤️ Спасибо за поддержку!",
+    supportCatalogBefore: "🌟 👉",
+    supportCatalogLink: "Каталог бесплатных офлайн-приложений ANTI-AI SHIELD",
+    footer: "Анти-ИИ Квен Академия • Бесплатный HTML-проект • Испанский язык ЕГЭ-2027 • ФИПИ",
+    qLabel1: "1. Вопрос",
+    qLabel2: "2. Что проверяет задание и как думать",
+    qLabel3: "Тренажёр — введи ответ",
+    checkBtn: "Проверить",
+    enterAnswer: "Введите ответ.",
+    placeholderShort: "Введите цифру, слово или последовательность цифр",
+    placeholderLong: "Введите развёрнутый ответ",
+    correct: "✅ Правильно!",
+    partial: "⚠️ Частично верно",
+    wrong: "❌ Неправильно.",
+    correctAnswer: "Ориентир:",
+    pointsLabel: "Баллов:",
+    explanationLabel: "Пояснение:",
+    sourceLabel: "Источник:",
+    part2Approx: "Автопроверка развёрнутых заданий приближённая. Итоговый балл сверяйте с критериями ФИПИ.",
+    seeExplanation: "см. пояснение",
+    passedBlocks: "Пройдено блоков:",
+    of: "из",
+    correctInPart1: "Верных ответов:",
+    primaryPart1: "Первичных баллов:",
+    answerAllBlocks: "Ответь на все блоки, чтобы увидеть итог.",
+    noteSelfCheck: "Для заданий 37–42 сверь ответ с критериями ФИПИ.",
+    verdictExcellent: "Отличный результат! Можно выходить на высокий балл.",
+    verdictGood: "Хорошо, но разбери ошибки и повтори темы.",
+    verdictNeed: "Нужно плотно проработать базу: аудирование, чтение, грамматика, письмо.",
+    confirmReset: "Сбросить все ответы и чек-лист?",
+    copyError: "Не удалось скопировать автоматически. Номер: ",
+    timerExam: "Испанский ЕГЭ — 190 мин",
+    timerListening: "Аудирование/чтение — 30 мин",
+    timerPractice: "Тренировка — 60 мин",
+    timerOral: "Устная часть — 17 мин",
+    timeUp: "Время вышло!",
+    topicListen: "Раздел 1. Аудирование",
+    topicRead: "Раздел 2. Чтение",
+    topicGram: "Раздел 3. Грамматика и лексика",
+    topicWrite: "Раздел 4. Письменная речь",
+    topicSpeak: "Устная часть",
+    taskLabel: "задание",
+    maxLabel: "макс.",
+    pointsShort: "б.",
+    openBase: "Открыть текст / материал задания",
+    matchLeft: "Левый список",
+    matchRight: "Правый список",
+    audioTag: "🎧 Раздел 1. Аудирование",
+    audioTitle: "Аудиозапись для заданий 1–9 — ",
+    audioNote: "На экзамене запись звучит дважды. Положите файл audio-es.mp3 рядом с HTML-файлом.",
+    audioError: "⚠️ Ошибка загрузки аудио. Убедитесь, что файл называется audio-es.mp3.",
+    audioTimerNote: "⏱ Рекомендуемое время на раздел — 30 минут.",
+    oralTag: "🎤 Устная часть · задание 3",
+    oralTitle: "Интервью — ",
+    oralNote: "Отдельный аудиофайл для устного задания 3. Положите рядом с HTML-файлом.",
+    oralError: "⚠️ Ошибка загрузки аудио. Убедитесь, что файл называется audio-es-oral.mp3.",
+    wordsLabel: "Слов:",
+    normLabel: "норма:",
+    dayLabel: "День "
+  },
+  en: {
+    docTitle: "Anti-AI Qwen Academy | Spanish EGE-2027",
+    metaDesc: "Offline Spanish EGE-2027 trainer: 38 written tasks + 4 oral tasks, 82 primary points, 190 minutes, FIPI structure.",
+    brandTitle: "Anti-AI Qwen Academy",
+    brandSub: "Spanish EGE-2027 · 42 tasks · 82 points",
+    navStructure: "Structure",
+    navChanges: "Changes 2027",
+    navCriteria: "Scoring",
+    navTrainer: "Trainer",
+    navChecklist: "Checklist",
+    navPlan: "25 Days",
+    navSupport: "Support",
+    badge: "FIPI 2027 · 42 tasks · 82 primary points · 190 minutes written + 17 minutes oral",
+    h1: 'Help you pass <span class="accent">Spanish EGE</span> correctly',
+    lead: "The trainer is based on the FIPI specification, codifier and demo versions of EGE-2027 in Spanish. Written part: 38 tasks. Oral part: 4 tasks. Maximum: 82 primary points. Time: 190 minutes for the written part and 17 minutes for the oral part.",
+    actionTrainer: "Take the trainer",
+    actionStructure: "Exam structure",
+    actionCriteria: "Criteria",
+    quickStats: "Quick stats",
+    metricBlocks: "blocks completed",
+    metricCorrect: "correct answers",
+    metricChecklist: "checklist",
+    noteReset: "Answers and checklist reset when the page is opened.",
+    structureTitle: "Spanish EGE structure",
+    structureSub: "38 written tasks + 4 oral tasks. 82 primary points. 190 minutes written + 17 minutes oral.",
+    changesTitle: "What changed in EGE-2027",
+    changesSub: "No changes in structure and content compared to 2026.",
+    criteriaTitle: "Scoring system",
+    criteriaSub: "Tasks 3–9, 12–36: 1 point. Task 1: 2 points. Tasks 2 and 10: 3 points. Task 11: 2 points. Task 37: 6 points. Task 38: 14 points. Oral part: 1 + 4 + 5 + 10 = 20 points.",
+    trainerTitle: "Trainer: 38 written + 4 oral tasks",
+    trainerSub: "Listening → Reading → Grammar & Vocabulary → Writing → Speaking.",
+    statusTag: "✅ Material status",
+    statusTitle: "Alignment with the FIPI 2027 demo",
+    statusText: "The written demo of EGE-2027 in Spanish is published. The trainer is aligned with the official FIPI demo and specification. Use audio-es.mp3 for listening and audio-es-oral.mp3 for oral task 3.",
+    trainerNote: "Tasks 1–36 require a digit, a word/phrase, or a sequence of digits. Tasks 37–42 provide an approximate self-check. Compare extended answers with FIPI criteria.",
+    filterLabel: "Show:",
+    filterAll: "All",
+    filterListen: "Listening",
+    filterRead: "Reading",
+    filterGram: "Grammar",
+    filterWrite: "Writing",
+    filterSpeak: "Speaking",
+    resetAll: "Reset all answers",
+    checklistTitle: "EGE-2027 preparation checklist",
+    checklistSub: "Tick completed items — the checklist resets when the page is opened again.",
+    planTitle: "Full 25-day course",
+    planSub: "Preparation route according to the EGE-2027 structure.",
+    supportTitle: "🤝 SUPPORT THE PROJECT 💙",
+    supportP1: "<strong>The app is free. It was and will remain free.</strong>",
+    supportP2: "All apps are free and ad-free. Your help supports offline security and education.",
+    supportPhoneLabel: "📱 TRANSFER BY PHONE NUMBER:",
+    copyPhone: "📋 Copy number",
+    copied: "✓ Copied",
+    supportP3: "✅ Money arrives instantly. No commission. Safe.",
+    supportP4: "❤️ Thanks for your support!",
+    supportCatalogBefore: "🌟 👉",
+    supportCatalogLink: "Catalog of free offline ANTI-AI SHIELD apps",
+    footer: "Anti-AI Qwen Academy • Free HTML Project • Spanish EGE-2027 • FIPI",
+    qLabel1: "1. Question",
+    qLabel2: "2. What the task assesses and how to approach it",
+    qLabel3: "Trainer — enter your answer",
+    checkBtn: "Check",
+    enterAnswer: "Enter the answer.",
+    placeholderShort: "Enter a digit, word, or sequence of digits",
+    placeholderLong: "Enter an extended answer",
+    correct: "✅ Correct!",
+    partial: "⚠️ Partially correct",
+    wrong: "❌ Incorrect.",
+    correctAnswer: "Reference:",
+    pointsLabel: "Points:",
+    explanationLabel: "Explanation:",
+    sourceLabel: "Source:",
+    part2Approx: "Auto-check of extended tasks is approximate. Compare the final score with FIPI criteria.",
+    seeExplanation: "see explanation",
+    passedBlocks: "Blocks completed:",
+    of: "of",
+    correctInPart1: "Correct answers:",
+    primaryPart1: "Primary points:",
+    answerAllBlocks: "Answer all blocks to see the result.",
+    noteSelfCheck: "For tasks 37–42, check your answer against FIPI criteria.",
+    verdictExcellent: "Excellent result! You can aim for a high score.",
+    verdictGood: "Good, but review mistakes and repeat topics.",
+    verdictNeed: "You need to work through the basics: listening, reading, grammar, writing.",
+    confirmReset: "Reset all answers and checklist?",
+    copyError: "Could not copy automatically. Number: ",
+    timerExam: "Spanish EGE — 190 min",
+    timerListening: "Listening/Reading — 30 min",
+    timerPractice: "Practice — 60 min",
+    timerOral: "Speaking — 17 min",
+    timeUp: "Time is up!",
+    topicListen: "Section 1. Listening",
+    topicRead: "Section 2. Reading",
+    topicGram: "Section 3. Grammar & Vocabulary",
+    topicWrite: "Section 4. Writing",
+    topicSpeak: "Speaking",
+    taskLabel: "task",
+    maxLabel: "max.",
+    pointsShort: "pts.",
+    openBase: "Open text / task material",
+    matchLeft: "Left list",
+    matchRight: "Right list",
+    audioTag: "🎧 Section 1. Listening",
+    audioTitle: "Audio for tasks 1–9 — ",
+    audioNote: "The recording plays twice on the exam. Place the file audio-es.mp3 next to the HTML file.",
+    audioError: "⚠️ Audio load error. Make sure the file is named audio-es.mp3.",
+    audioTimerNote: "⏱ Recommended time for this section — 30 minutes.",
+    oralTag: "🎤 Speaking · task 3",
+    oralTitle: "Interview — ",
+    oralNote: "Separate audio file for oral task 3. Place next to the HTML file.",
+    oralError: "⚠️ Audio load error. Make sure the file is named audio-es-oral.mp3.",
+    wordsLabel: "Words:",
+    normLabel: "norm:",
+    dayLabel: "Day "
+  }
+};
+
+function loc(k) {
+  return (I18N[currentLang] && I18N[currentLang][k]) || I18N.ru[k] || "";
+}
+
+function isLocalised(v) {
+  return v && typeof v === "object" && !Array.isArray(v) && (Object.prototype.hasOwnProperty.call(v, "ru") || Object.prototype.hasOwnProperty.call(v, "en"));
+}
+
+function locValue(v) {
+  if (isLocalised(v)) return v[currentLang] || v.ru || v.en || "";
+  return v;
+}
+
+const STRUCTURE_CARDS = {
+  ru: [
+    { tag: "Всего", cls: "success-card", tagCls: "green", title: "42 задания = 82 балла", list: [
+      "Письменная часть: 38 заданий (190 минут).",
+      "Устная часть: 4 задания (17 минут).",
+      "Аудирование (1–9): 12 баллов (14,6 %).",
+      "Чтение (10–18): 12 баллов (14,6 %).",
+      "Грамматика и лексика (19–36): 18 баллов (22 %).",
+      "Письменная речь (37–38): 20 баллов (24,4 %).",
+      "Говорение (39–42): 20 баллов (24,4 %)."
+    ]},
+    { tag: "Раздел 1", cls: "warn-card", tagCls: "orange", title: "Аудирование (1–9)", list: [
+      "Задание 1 — 6 высказываний, соответствие A–F и 1–7, 2 балла.",
+      "Задание 2 — диалог, Verdadero / Falso / No se menciona, 3 балла.",
+      "Задания 3–9 — интервью, по 1 баллу.",
+      "Аудиозапись звучит дважды.",
+      "Файл: audio-es.mp3."
+    ]},
+    { tag: "Раздел 2", cls: "warn-card", tagCls: "orange", title: "Чтение (10–18)", list: [
+      "Задание 10 — 7 текстов и 8 заголовков, 3 балла.",
+      "Задание 11 — пропуски A–F, части 1–7, 2 балла.",
+      "Задания 12–18 — полное понимание текста, по 1 баллу.",
+      "Текст 12–18: «Recuerdos que se sirven en el plato»."
+    ]},
+    { tag: "Раздел 3", cls: "danger-card", tagCls: "red", title: "Грамматика и лексика (19–36)", list: [
+      "19–24 — грамматические формы; два альтернативных текста.",
+      "25–29 — словообразование: «El yoga y la salud».",
+      "30–36 — лексика в тексте: «Las aventuras de Colón en Jamaica».",
+      "Рекомендуемое время: около 40 минут."
+    ]},
+    { tag: "Раздел 4 + устная", cls: "danger-card", tagCls: "red", title: "Письменная и устная речь", list: [
+      "Задание 37: электронное письмо Clara, 100–140 слов, 6 баллов.",
+      "Задание 38: высказывание по таблице/диаграмме, 200–250 слов, 14 баллов.",
+      "Устная часть 1: чтение вслух, 1 балл.",
+      "Устная часть 2: 4 вопроса по объявлению, 4 балла.",
+      "Устная часть 3: интервью о спорте, 5 баллов.",
+      "Устная часть 4: проект «Viajar solo o en grupo», 10 баллов."
+    ]}
+  ],
+  en: [
+    { tag: "Total", cls: "success-card", tagCls: "green", title: "42 tasks = 82 points", list: [
+      "Written part: 38 tasks (190 minutes).",
+      "Oral part: 4 tasks (17 minutes).",
+      "Listening (1–9): 12 points (14.6%).",
+      "Reading (10–18): 12 points (14.6%).",
+      "Grammar & Vocabulary (19–36): 18 points (22%).",
+      "Writing (37–38): 20 points (24.4%).",
+      "Speaking (39–42): 20 points (24.4%)."
+    ]},
+    { tag: "Section 1", cls: "warn-card", tagCls: "orange", title: "Listening (1–9)", list: [
+      "Task 1 — 6 statements, matching A–F and 1–7, 2 points.",
+      "Task 2 — dialogue, Verdadero / Falso / No se menciona, 3 points.",
+      "Tasks 3–9 — interview, 1 point each.",
+      "The audio plays twice.",
+      "File: audio-es.mp3."
+    ]},
+    { tag: "Section 2", cls: "warn-card", tagCls: "orange", title: "Reading (10–18)", list: [
+      "Task 10 — 7 texts and 8 headings, 3 points.",
+      "Task 11 — gaps A–F, parts 1–7, 2 points.",
+      "Tasks 12–18 — full text comprehension, 1 point each.",
+      "Text 12–18: «Recuerdos que se sirven en el plato»."
+    ]},
+    { tag: "Section 3", cls: "danger-card", tagCls: "red", title: "Grammar & Vocabulary (19–36)", list: [
+      "19–24 — grammatical forms; two alternative texts.",
+      "25–29 — word formation: «El yoga y la salud».",
+      "30–36 — vocabulary in text: «Las aventuras de Colón en Jamaica».",
+      "Recommended time: about 40 minutes."
+    ]},
+    { tag: "Section 4 + Speaking", cls: "danger-card", tagCls: "red", title: "Writing & Speaking", list: [
+      "Task 37: personal email to Clara, 100–140 words, 6 points.",
+      "Task 38: statement based on table/diagram, 200–250 words, 14 points.",
+      "Speaking 1: reading aloud, 1 point.",
+      "Speaking 2: 4 questions on an ad, 4 points.",
+      "Speaking 3: interview about sports, 5 points.",
+      "Speaking 4: project «Viajar solo o en grupo», 10 points."
+    ]}
+  ]
+};
+
+const CHANGES_CARDS = {
+  ru: [
+    { tag: "Структура", cls: "success-card", tagCls: "green", title: "Изменений нет", text: "В 2027 году структура и содержание КИМ ЕГЭ по испанскому языку не изменились по сравнению с 2026 годом." },
+    { tag: "Документы", cls: "", tagCls: "", title: "Основание", text: "Кодификатор составлен на основе ФГОС СОО и ФОП СОО с учётом изменений, включённых в материалы ФИПИ 2027." },
+    { tag: "Оборудование", cls: "warn-card", tagCls: "orange", title: "Разрешено на экзамене", text: "Технические средства для воспроизведения аудиозаписей; компьютерная техника без доступа к интернету; аудиогарнитура для устной части." },
+    { tag: "Внимание", cls: "danger-card", tagCls: "red", title: "Типичные ловушки", text: "В заданиях 1, 2, 10, 11 лишние символы в ответе дают 0 баллов. В задании 37 менее 90 слов = 0 баллов; более 154 слов проверяются только первые 140 слов. В задании 38 менее 180 слов = 0 баллов; более 275 слов проверяются только первые 250 слов." }
+  ],
+  en: [
+    { tag: "Structure", cls: "success-card", tagCls: "green", title: "No changes", text: "Structure and content of EGE-2027 in Spanish are unchanged from 2026." },
+    { tag: "Documents", cls: "", tagCls: "", title: "Basis", text: "The codifier is based on FSES SOO and FOP SOO with changes included in FIPI 2027 materials." },
+    { tag: "Equipment", cls: "warn-card", tagCls: "orange", title: "Allowed at the exam", text: "Audio playback devices; computer hardware without internet access; audio headset for the oral part." },
+    { tag: "Attention", cls: "danger-card", tagCls: "red", title: "Common traps", text: "In tasks 1, 2, 10, 11 extra characters in the answer give 0 points. In task 37 less than 90 words = 0 points; more than 154 words — only the first 140 words are checked. In task 38 less than 180 words = 0 points; more than 275 words — only the first 250 words are checked." }
+  ]
+};
+
+const CRITERIA_CARDS = {
+  ru: [
+    { tag: "1 балл", cls: "", tagCls: "", title: "Задания 3–9, 12–36", list: [
+      "Ответ — цифра или слово.",
+      "Должен полностью совпадать с эталоном.",
+      "В бланке слова пишутся без пробелов и знаков препинания.",
+      "Ñ и N считаются идентичными при проверке кратких ответов."
+    ]},
+    { tag: "2–3 балла", cls: "warn-card", tagCls: "orange", title: "Задания 1, 2, 10, 11", list: [
+      "Задание 1: 2 балла.",
+      "Задание 2: 3 балла.",
+      "Задание 10: 3 балла.",
+      "Задание 11: 2 балла.",
+      "Каждая ошибка в позиции уменьшает балл на 1, но не ниже 0.",
+      "Если символов больше требуемого — 0 баллов."
+    ]},
+    { tag: "6 баллов", cls: "warn-card", tagCls: "orange", title: "Задание 37 (электронное письмо)", list: [
+      "К1 Решение коммуникативной задачи — 2 балла.",
+      "К2 Организация текста — 2 балла.",
+      "К3 Языковое оформление — 2 балла.",
+      "Объём: 100–140 слов.",
+      "Менее 90 слов — 0 баллов.",
+      "Более 154 слов — проверяются только первые 140 слов."
+    ]},
+    { tag: "14 баллов", cls: "warn-card", tagCls: "orange", title: "Задание 38 (письменное высказывание)", list: [
+      "К1 Решение коммуникативной задачи — 3 балла.",
+      "К2 Организация текста — 3 балла.",
+      "К3 Лексика — 3 балла.",
+      "К4 Грамматика — 3 балла.",
+      "К5 Орфография и пунктуация — 2 балла.",
+      "Объём: 200–250 слов.",
+      "Менее 180 слов — 0 баллов.",
+      "Более 275 слов — проверяются только первые 250 слов.",
+      "Более 30 % текстуальных совпадений с источником — 0 баллов по всему заданию."
+    ]},
+    { tag: "20 баллов", cls: "success-card", tagCls: "green", title: "Устная часть (39–42)", list: [
+      "Задание 1: чтение вслух — 1 балл.",
+      "Задание 2: 4 вопроса — до 4 баллов.",
+      "Задание 3: 5 ответов — до 5 баллов.",
+      "Задание 4: проектное высказывание — до 10 баллов.",
+      "Задание 3: ответ менее 2 фраз — 0 баллов за ответ.",
+      "Задание 4: 7 фраз и менее — 0 баллов."
+    ]}
+  ],
+  en: [
+    { tag: "1 point", cls: "", tagCls: "", title: "Tasks 3–9, 12–36", list: [
+      "Answer is a digit or a word.",
+      "Must fully match the key.",
+      "In the form, words are written without spaces or punctuation.",
+      "Ñ and N are considered identical for short answers."
+    ]},
+    { tag: "2–3 points", cls: "warn-card", tagCls: "orange", title: "Tasks 1, 2, 10, 11", list: [
+      "Task 1: 2 points.",
+      "Task 2: 3 points.",
+      "Task 10: 3 points.",
+      "Task 11: 2 points.",
+      "Each position error reduces the score by 1, but not below 0.",
+      "More characters than required — 0 points."
+    ]},
+    { tag: "6 points", cls: "warn-card", tagCls: "orange", title: "Task 37 (personal email)", list: [
+      "K1 Communicative task — 2 points.",
+      "K2 Text organisation — 2 points.",
+      "K3 Language — 2 points.",
+      "Length: 100–140 words.",
+      "Less than 90 words — 0 points.",
+      "More than 154 words — only the first 140 words are checked."
+    ]},
+    { tag: "14 points", cls: "warn-card", tagCls: "orange", title: "Task 38 (written statement)", list: [
+      "K1 Communicative task — 3 points.",
+      "K2 Text organisation — 3 points.",
+      "K3 Vocabulary — 3 points.",
+      "K4 Grammar — 3 points.",
+      "K5 Spelling and punctuation — 2 points.",
+      "Length: 200–250 words.",
+      "Less than 180 words — 0 points.",
+      "More than 275 words — only the first 250 words are checked.",
+      "More than 30% textual matches with the source — 0 points for the whole task."
+    ]},
+    { tag: "20 points", cls: "success-card", tagCls: "green", title: "Speaking (39–42)", list: [
+      "Task 1: reading aloud — 1 point.",
+      "Task 2: 4 questions — up to 4 points.",
+      "Task 3: 5 answers — up to 5 points.",
+      "Task 4: project statement — up to 10 points.",
+      "Task 3: answer shorter than 2 phrases — 0 points.",
+      "Task 4: 7 phrases or fewer — 0 points."
+    ]}
+  ]
+};
+
+const TEXT_READ_10 = `A. Los jóvenes en Rusia tienden a priorizar la felicidad personal sobre otros aspectos, como, por ejemplo, el reconocimiento social. Esta tendencia se manifiesta en una mayor preocupación por la búsqueda de trabajos con buenos ambientes laborales que les permitan tener tiempo para sus hobbies. A diferencia de generaciones anteriores, muchos jóvenes están dispuestos a sacrificar mayores ingresos o posiciones de mayor responsabilidad si eso implica un ambiente laboral menos estresante.
+
+B. La juventud se reduce en España. En cuarenta años, la tasa de juventud ha pasado del 24% al 15% de la población en 2025. Lo que supone una pérdida de 1,3 millones de jóvenes en este período, indica el informe. España ha experimentado una disminución en el número de nacimientos en las últimas décadas, lo que ha llevado a una reducción general de la población joven. Por otra parte, de los 7,6 millones de jóvenes que residen en España, el 16% son de origen extranjero, de Marruecos, Colombia, Rumanía y Venezuela.
+
+C. Chavales más educados, con más empleo –aunque precario–, interesados en la política y con mayor bienestar emocional. Así es parte del retrato que se desprende del último informe del Ministerio de Juventud e Infancia, publicado sobre los jóvenes españoles (de 15 a 34 años). Un documento que se elabora desde hace cuarenta años y se publica cada cuatro años, donde el ministerio analiza y compara datos sobre diversas temáticas que van desde la salud mental, el interés por la política hasta el empleo.
+
+D. Según el informe, los jóvenes se emancipan con edades cada vez más altas. En España la edad para dejar el hogar familiar es de 30,4 años, mientras que en el conjunto de Europa es de 26,3. La independencia se ve obstaculizada por el alto costo de la vivienda. La dificultad para acceder a una vivienda condiciona todos los aspectos de la vida de los jóvenes. El 95% estaría dispuesto a renunciar a parte de su estilo de vida con tal de independizarse: recortes en tecnología, viajes, ocio, e incluso formar una familia en el corto plazo.
+
+E. Los datos reflejan la creciente importancia de los estudios. El porcentaje de jóvenes que ni estudian ni trabajan se redujo a un 12,3%. Al mismo tiempo se ha producido un aumento de chavales que estudian y además trabajan. Son mayoría, además, los jóvenes que aseguraron que les gustaría alcanzar un nivel formativo mayor. Una gran parte de los jóvenes que desean estudiar una carrera universitaria se inclinan por áreas como administración y dirección de empresas, marketing y publicidad, derecho y magisterio.
+
+F. En estos 40 años, la tasa de paro de personas de entre 16 y 24 años se redujo a 26,5%. Esto significa que, aproximadamente, uno de cada cuatro jóvenes menores de 25 años que busca trabajo no lo encuentra. Si bien esta cifra es menor que en años anteriores, España sigue estando por encima de la media europea en desempleo juvenil. La estructura del mercado laboral, con alta protección para los empleados fijos y menor protección para los temporales y desempleados, es un factor que contribuye al alto desempleo juvenil.
+
+G. El informe resalta que los jóvenes son cada vez más conscientes de la salud y el bienestar emocional. 7 de cada 10 jóvenes aseguran que la salud emocional es un tema habitual, o surge de vez en cuando, en reuniones sociales con amigos o en su entorno social. En el caso de la terapia, solo un 17% dice tener apoyo psicológico profesional. En cuanto a cómo se cuidan, los jóvenes españoles sobresalen, en relación a los europeos, con hábitos alimentarios más saludables y con más tiempo para dormir y descansar y practicar deporte.`;
+
+const TEXT_READ_11 = `Las olimpiadas escolares
+En la Grecia antigua, el deporte y la educación estaban directamente relacionados. Los jóvenes asistían a gimnasios, instituciones que combinaban la preparación física A_______________________. El entrenamiento se consideraba esencial para el desarrollo del carácter y la preparación para la vida adulta.
+
+En la actualidad las olimpiadas escolares son un evento B_______________________ con el objetivo de fomentar la actividad física, promover los valores del deporte y reforzar hábitos saludables entre el alumnado.
+
+Además, el ejercicio contribuye al bienestar emocional, la socialización y a los resultados académicos. Es por ello que estos eventos son una buena oportunidad para fomentar la actividad física y ayudar a los estudiantes C_______________________ y saludable. Para una buena planificación, ejecución y supervisión, se nombran responsables. Estos pueden ser profesores de educación física, miembros del personal docente o familiares voluntarios.
+
+Otro aspecto importante es hacer la lista de las disciplinas deportivas. Es imprescindible tener D_______________________, las diferentes habilidades y las preferencias de los estudiantes con el objetivo de que todos puedan participar.
+
+Las más populares son el atletismo, la natación, el fútbol, el baloncesto, el voleibol o el pimpón. Se necesita un espacio E_______________________ diferentes disciplinas. Incluso hay que contar con el material necesario como botiquín, vendajes o camilla para atender cualquier accidente que pueda suceder. Además, es esencial contar F_______________________ cualificado el día del evento.`;
+
+const TEXT_READ_12 = `Recuerdos que se sirven en el plato
+Cuando uno empieza la universidad sabe que habrá amigos que se queden para siempre. Pase el tiempo que pase, siempre formarán parte de los mejores recuerdos por los planes, las comidas... A esto se suman gustos similares y experiencias vividas que luego se convierten en lugares comunes en los que siempre nos reencontraremos. Yo nací, crecí y estudié en Colombia, y aquí para siempre quedan los mejores y los más tiernos recuerdos de la juventud.
+
+En Colombia, cocinar siempre ha sido mucho más que preparar alimentos. Es un acto de amor y de memoria. Así me pasó hace unos días en el restaurante Helena Adentro, en Filandia (Quindío). Bastaron unos pasos para saber que esta casa de coloridas paredes y aromas que invitan al abrazo no era un restaurante cualquiera. Helena Adentro me hizo recordar las risas y los cuentos de Helena Sarria, o simplemente Helen, una compañera de universidad, con quien siempre hubo un buen motivo para una empanada y una bebida. Ahora lidera la operación de este irrepetible lugar que a tanta gente atrae.
+
+Aquí no se viene solo a comer: se viene a compartir, a recordar, a descubrir y, si se está dispuesto, incluso a hacer planes para el futuro. La cocina del restaurante Helena Adentro es una carta de amor al producto local y una travesía sin fronteras. Ingredientes de Quindío y regiones cercanas se encuentran a la perfección con técnicas traídas desde diferentes lugares del mundo por Alejandro, otro de los socios, cocinero por amor, quien hace la magia y transforma ingredientes y sabores en experiencias inolvidables. Completa este trío Jade, quien llegó de Nueva Zelanda hace unos años y está enamorada de la diversidad y frescura de los productos colombianos.
+
+Colombia, con su diversidad de paisajes, culturas y sabores, es un paraíso para quienes buscan experiencias auténticas y muy propias de cada cultura. La propuesta de Helena Adentro entiende que lo colombiano no es una receta fija, sino un universo en expansión. Probé unas patatas que no tienen comparación: las patatas caseras, cortadas artesanalmente, servidas con queso fresco de la región. Nada está congelado.
+
+Luego llegaron las especialidades de la casa: chicharrones y marranitas de Helena, hechas con masa de maíz, que son un nivel superior. Platos pensados para compartir, con una particularidad: la delicadeza de una cocina que respeta el ingrediente. El cierre llegó con un recuerdo de mi abuela, no por cursi, sino por su sabor honesto y limpio, de esos que llenan el alma: una torta de pan que me abrazó.
+
+No es casualidad que en varias ocasiones hayan sido reconocidos como el mejor restaurante del Eje Cafetero, la región más emblemática de Colombia, famosa por producir uno de los mejores cafés del mundo.
+
+Se sabe que viajar es un acto de amor y mucho conocimiento. Amor por la preparación, el descubrimiento, por la diferencia, por el paisaje que le quita a uno el aliento y por la gente que sin conocernos ofrece lo mejor de su tierra. Este lugar es un homenaje a lo que somos cuando cocinamos con amor, con respeto por la tierra y con una mirada que va más allá del plato.
+
+Helena Adentro es, sin duda, un restaurante para quedarse. Para regresar. Para llevarse gracias a su línea de productos hechos en casa y embalados con cariño. Esta casa rosada nos recuerda que la gastronomía es una forma de contar quiénes somos y hacia dónde vamos. Al final, cuando recogen la mesa y uno mira el pueblo desde la terraza, entiende el porqué del nombre. Todo lo que uno necesita –el antojo, el calor, la memoria, la sorpresa– está adentro, en la casa, en el plato, en el corazón. En esos mismos recuerdos que guardamos de los años estudiantiles y de la vida.`;
+
+const TEXT_GRAMMAR_19_ES = `Una boda frustrada
+Esto sucedió en un pueblo de los Andes, en la época antigua en la que los animales se convertían en hombres. Una muchacha solía llevar a pastar a sus llamas al cerro. No se daba cuenta de que era observada por un lagarto porque este 19__________________ de ella. ENAMORARSE
+
+Un día el lagarto se convirtió en un apuesto joven y se presentó delante de la chica. Alabó su hermosura y terminó diciendo que la amaba mucho y que si la chica no 20__________________ con él, acabaría desesperado. CASARSE
+
+Al ver a un joven tan lindo la chica se enamoró. El joven insistió: «Vamos a tu casa para que tus padres 21__________________ su permiso para casarnos». DAR
+
+Los padres dieron su bendición. La madre dijo a su hija: «22__________________ buena esposa para este hombre pues has encontrado tu suerte». SER
+
+El día de la boda en la iglesia, ya cuando el cura iba a declararlos marido y mujer, por detrás del altar apareció un gato negro. El novio 23________________ notó y convirtiéndose en un lagarto empezó a buscar algún escondite. ÉL
+
+La agilidad del gato se impuso a los torpes movimientos del reptil, quien fue devorado. Todos se lanzaron tras el gato, pero este 24__________________. La novia quedó inconciente. Dicen que desde aquel día jamás volvió a hablar con ningún muchacho. HUIR
+
+Sueño salado / En la sala de operaciones
+El director de una empresa llegó a la casa de una adivina y le dijo:
+− Señora, esta semana 19__________________ con mi despacho, mis empleados y mucha sal. Por favor, ¿me puede decir qué significa? SOÑAR
+
+La adivina 20__________________ su bola de cristal y dijo al señor:
+− Significa que los empleados están hablando, señor director. CONTEMPLAR
+
+El director se quedó pensativo y preguntó:
+− Explique, por favor, ¿en qué sentido?
+
+La bruja contestó:
+− Los empleados están diciendo: «Hala, tú, 21__________________ del despacho, director». SALIR
+
+En la sala de operaciones
+Tres cirujanos discutían a quiénes era más cómodo operar.
+
+El primer cirujano dijo que siempre le 22__________________ operar a los contables porque todo estaba ordenado por números. GUSTAR
+
+El segundo cirujano respondió que estaba de acuerdo, pero que los 23__________________ eran los electricistas porque todos los órganos estaban codificados por colores, no había forma de equivocarse. BUENO
+
+El tercer cirujano agregó: «Para 24__________________ es más fácil operar a los bibliotecarios porque dentro de ellos todo está ordenado alfabéticamente. Sin embargo, los políticos son insuperables porque no tienen corazón». YO`;
+
+const TEXT_GRAMMAR_25 = `El yoga y la salud
+Cuando la gente comienza a practicar yoga, quiere sudar y desarrollar fuerza. Lo ve simplemente como una forma de 25__________________, pero después suele descubrir que es mucho más. La práctica del yoga se remonta a más de 2000 años en la antigua India. EJERCER
+
+Y aunque hoy en día existen diferentes tipos de yoga, todas las formas se centran en una conexión mente-cuerpo. Las investigaciones recientes lograron demostrar que el yoga puede ser 26__________________ para una amplia gama de problemas de salud. BENEFICIO
+
+Cada vez hay más pruebas de que el yoga no solo tiene beneficios físicos, sino que también puede ser bueno para la mente. Algunos investigadores incluso esperan que pueda ser un antidepresivo muy efectivo. Los deportistas y entrenadores aseguran que refuerza la resistencia y la 27__________________. ÁGIL
+
+También puede 28__________________ lesiones, aunque a veces puede ser una causa de lesiones si no se realiza correctamente. VENIR
+
+De todos modos ayuda a mejorar el rendimiento en los deportes, como lo declaran futbolistas y jugadores de baloncesto 29__________________ conocidos. MUNDIAL`;
+
+const TEXT_GRAMMAR_30 = `Las aventuras de Colón en Jamaica
+El eclipse es un fenómeno natural en el que la luz procedente de un cuerpo celeste es bloqueada por otro cuerpo celeste. Existen eclipses de Sol y de Luna, que ocurren solo cuando el Sol y la Luna se alinean con la Tierra de una manera determinada.
+
+Desde 30 ______ los astrónomos saben calcular cuándo tendrán lugar los eclipses y existen calendarios especiales. En ocasiones, un eclipse puede cambiar el rumbo de eventos históricos. Así, en su último viaje, Cristóbal Colón llegó con sus barcos a Jamaica. Temiendo 31 ______ el hambre como el conflicto, Colón prohibió a su tripulación abandonar las naves y él mismo intercambió baratijas y joyas por alimentos y agua con los locales. Pero algunos miembros de la tripulación 32 ______ y huyeron a la isla. Robaron provisiones y cometieron todo tipo de excesos.
+
+Pronto los isleños perdieron la paciencia. La tolerancia dio paso al odio, y el comercio de alimentos 33 ______. Colón y la tripulación restante se quedaron al 34 ______ del hambre y la desesperación. Felizmente Colón recordó que se aproximaba un eclipse lunar. Reunió a los caciques, les reprochó el haber retirado las provisiones y les advirtió: «El dios que me protege los castigará. Esta misma noche la Luna cambiará de color y perderá su luz, en testimonio de los 35 ______ que les serán enviados desde los cielos». Y funcionó.
+
+Los temerosos locales cedieron y proporcionaron alimentos nuevamente. Colón prometió realizar un rito que los «perdonaría». Con las provisiones donadas 36 ______ los indios Cristóbal Colón regresó felizmente de su último viaje.`;
+
+const TEXT_ORAL_39 = `El monorraíl es un tipo de transporte ferroviario que tiene un solo carril, y utiliza una sola pista o vía. Los monorraíles se utilizan para el transporte ferroviario de pasajeros, pero también se utilizan para traslados de aeropuerto y contadores de capacidad media. Iván Elmánov fue el primero en inventar el monorraíl en Rusia en 1820, pero en su mente los carruajes tenían que ser tirados por caballos y sus ruedas estaban en la barandilla y no en los carruajes.
+
+Desde la primera idea hasta la mitad del siglo XX, muchos países se propusieron y probaron muchas variantes de monorraíl, pero rara vez vieron la luz del día, excepto como prototipos. Las instalaciones de exposición y los parques de atracciones fueron los primeros usuarios de monorraíles y los comercializaron como tecnología futurista. Pero no llegaron a ser muy populares, en parte debido a la competencia con el automóvil y el sistema de metro.`;
+
+const QUIZ = [
+  { n: 1, topic: "listen", scoringType: "strict-partial", accepted: ["164732"], answer: "164732",
+    matchOptions: {
+      ru: [
+        { char: "A", name: "Говорящий A" }, { char: "B", name: "Говорящий B" }, { char: "C", name: "Говорящий C" },
+        { char: "D", name: "Говорящий D" }, { char: "E", name: "Говорящий E" }, { char: "F", name: "Говорящий F" }
+      ],
+      en: [
+        { char: "A", name: "Speaker A" }, { char: "B", name: "Speaker B" }, { char: "C", name: "Speaker C" },
+        { char: "D", name: "Speaker D" }, { char: "E", name: "Speaker E" }, { char: "F", name: "Speaker F" }
+      ]
+    },
+    matchQuotes: [
+      { num: 1, text: "La naturaleza facilita conexiones sociales." },
+      { num: 2, text: "Ayudar une corazones y crea amistades sinceras." },
+      { num: 3, text: "Compartir estudios crea conexiones significativas." },
+      { num: 4, text: "El ambiente laboral facilita hacer amigos." },
+      { num: 5, text: "La música compartida acerca corazones." },
+      { num: 6, text: "Las actividades informales ayudan a conocer gente." },
+      { num: 7, text: "Conocer gente virtualmente elimina fronteras físicas." }
+    ],
+    ru: {
+      text: "Вы услышите 6 высказываний. Установите соответствие между высказываниями говорящих A–F и утверждениями 1–7. Одно утверждение лишнее. Запишите последовательность цифр без пробелов.",
+      info: "Задание 1. Максимум 2 балла. Каждая ошибка уменьшает балл на 1, но не ниже 0. Если символов больше 6 — 0 баллов.",
+      explanation: "Ключ ФИПИ: A-1, B-6, C-4, D-7, E-3, F-2. Лишнее утверждение — 5. Ответ: 164732.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 1."
+    },
+    en: {
+      text: "You will hear 6 statements. Match speakers A–F with statements 1–7. One statement is extra. Write the sequence of digits without spaces.",
+      info: "Task 1. Max 2 points. Each error reduces the score by 1, but not below 0. If more than 6 characters — 0 points.",
+      explanation: "FIPI key: A-1, B-6, C-4, D-7, E-3, F-2. Extra statement — 5. Answer: 164732.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 1."
+    }},
+
+  { n: 2, topic: "listen", scoringType: "strict-partial", accepted: ["1132213"], answer: "1132213",
+    ru: {
+      text: "Вы услышите диалог. Определите, какие утверждения A–G соответствуют тексту (1 – Verdadero), не соответствуют (2 – Falso) или не упоминаются (3 – No se menciona).\n\nA. La madre y el hijo van a preparar una fiesta a escondidas.\nB. El evento tendrá lugar en el exterior de la vivienda.\nC. El padre cumple sesenta años.\nD. La tía Lupe preparará dulces.\nE. El hijo quiere comprar el regalo solo.\nF. El reloj del padre ya no funciona.\nG. La fiesta empezará por la mañana.",
+      info: "Задание 2. Максимум 3 балла. Каждая ошибка уменьшает балл на 1, но не ниже 0. Если символов больше 7 — 0 баллов.",
+      explanation: "Ключ ФИПИ: A-1, B-1, C-3, D-2, E-2, F-1, G-3. Ответ: 1132213.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 2."
+    },
+    en: {
+      text: "You will hear a dialogue. Identify statements A–G as True (1 – Verdadero), False (2 – Falso), or Not stated (3 – No se menciona).\n\nA. La madre y el hijo van a preparar una fiesta a escondidas.\nB. El evento tendrá lugar en el exterior de la vivienda.\nC. El padre cumple sesenta años.\nD. La tía Lupe preparará dulces.\nE. El hijo quiere comprar el regalo solo.\nF. El reloj del padre ya no funciona.\nG. La fiesta empezará por la mañana.",
+      info: "Task 2. Max 3 points. Each error reduces the score by 1, but not below 0. If more than 7 characters — 0 points.",
+      explanation: "FIPI key: A-1, B-1, C-3, D-2, E-2, F-1, G-3. Answer: 1132213.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 2."
+    }},
+
+  { n: 3, topic: "listen", scoringType: "word", accepted: ["1"], answer: "1",
+    ru: {
+      text: "Según Laura, la tecnología puede ser un apoyo en el ámbito educativo si...\n\n1) los padres son responsables de sus hijos.\n2) los alumnos están atraídos por la pantalla.\n3) los docentes se encargan de controlar a los menores.",
+      info: "Задание 3. 1 балл.",
+      explanation: "Ключ: 1. Laura menciona la autoridad parental y el sentido común.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 3."
+    },
+    en: {
+      text: "Según Laura, la tecnología puede ser un apoyo en el ámbito educativo si...\n\n1) los padres son responsables de sus hijos.\n2) los alumnos están atraídos por la pantalla.\n3) los docentes se encargan de controlar a los menores.",
+      info: "Task 3. 1 point.",
+      explanation: "Key: 1. Laura mentions parental authority and common sense.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 3."
+    }},
+
+  { n: 4, topic: "listen", scoringType: "word", accepted: ["3"], answer: "3",
+    ru: {
+      text: "Laura publicó su libro...\n\n1) para comunicarse mejor con sus alumnos.\n2) para desarrollar su blog de tecnología.\n3) por la curiosidad sobre la experiencia digital de su hijo.",
+      info: "Задание 4. 1 балл.",
+      explanation: "Ключ: 3.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 4."
+    },
+    en: {
+      text: "Laura publicó su libro...\n\n1) para comunicarse mejor con sus alumnos.\n2) para desarrollar su blog de tecnología.\n3) por la curiosidad sobre la experiencia digital de su hijo.",
+      info: "Task 4. 1 point.",
+      explanation: "Key: 3.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 4."
+    }},
+
+  { n: 5, topic: "listen", scoringType: "word", accepted: ["3"], answer: "3",
+    ru: {
+      text: "El libro de Laura se diferencia de otros porque...\n\n1) trata de la adicción a las tecnologías.\n2) prohíbe las pantallas en el aula.\n3) subraya la importancia de lo digital en clase.",
+      info: "Задание 5. 1 балл.",
+      explanation: "Ключ: 3.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 5."
+    },
+    en: {
+      text: "El libro de Laura se diferencia de otros porque...\n\n1) trata de la adicción a las tecnologías.\n2) prohíbe las pantallas en el aula.\n3) subraya la importancia de lo digital en clase.",
+      info: "Task 5. 1 point.",
+      explanation: "Key: 3.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 5."
+    }},
+
+  { n: 6, topic: "listen", scoringType: "word", accepted: ["2"], answer: "2",
+    ru: {
+      text: "Carlos dice que la actitud hacia los dispositivos...\n\n1) se ha quedado igual.\n2) ha cambiado rápidamente.\n3) siempre ha sido negativa.",
+      info: "Задание 6. 1 балл.",
+      explanation: "Ключ: 2.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 6."
+    },
+    en: {
+      text: "Carlos dice que la actitud hacia los dispositivos...\n\n1) se ha quedado igual.\n2) ha cambiado rápidamente.\n3) siempre ha sido negativa.",
+      info: "Task 6. 1 point.",
+      explanation: "Key: 2.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 6."
+    }},
+
+  { n: 7, topic: "listen", scoringType: "word", accepted: ["2"], answer: "2",
+    ru: {
+      text: "Cuando Laura trabajaba en un instituto...\n\n1) los alumnos presumían de tener iPads.\n2) tenía conflictos a causa del uso de los móviles.\n3) no establecía límites ni normas.",
+      info: "Задание 7. 1 балл.",
+      explanation: "Ключ: 2.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 7."
+    },
+    en: {
+      text: "Cuando Laura trabajaba en un instituto...\n\n1) los alumnos presumían de tener iPads.\n2) tenía conflictos a causa del uso de los móviles.\n3) no establecía límites ni normas.",
+      info: "Task 7. 1 point.",
+      explanation: "Key: 2.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 7."
+    }},
+
+  { n: 8, topic: "listen", scoringType: "word", accepted: ["1"], answer: "1",
+    ru: {
+      text: "Laura administra el uso de los dispositivos en casa...\n\n1) enseñando cómo se actúa en la vida virtual.\n2) prohibiendo las tabletas.\n3) jugando junto con su hijo.",
+      info: "Задание 8. 1 балл.",
+      explanation: "Ключ: 1.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 8."
+    },
+    en: {
+      text: "Laura administra el uso de los dispositivos en casa...\n\n1) enseñando cómo se actúa en la vida virtual.\n2) prohibiendo las tabletas.\n3) jugando junto con su hijo.",
+      info: "Task 8. 1 point.",
+      explanation: "Key: 1.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 8."
+    }},
+
+  { n: 9, topic: "listen", scoringType: "word", accepted: ["2"], answer: "2",
+    ru: {
+      text: "Carlos opina que los padres...\n\n1) saben utilizar bien las tecnologías.\n2) deben ser un ejemplo para sus hijos.\n3) imponen condiciones poco realizables.",
+      info: "Задание 9. 1 балл.",
+      explanation: "Ключ: 2.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 9."
+    },
+    en: {
+      text: "Carlos opina que los padres...\n\n1) saben utilizar bien las tecnologías.\n2) deben ser un ejemplo para sus hijos.\n3) imponen condiciones poco realizables.",
+      info: "Task 9. 1 point.",
+      explanation: "Key: 2.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 9."
+    }},
+
+  { n: 10, topic: "read", scoringType: "strict-partial", accepted: ["5436812"], answer: "5436812",
+    base: { ru: TEXT_READ_10, en: TEXT_READ_10 },
+    matchOptions: {
+      ru: [
+        { char: "A", name: "Текст A" }, { char: "B", name: "Текст B" }, { char: "C", name: "Текст C" },
+        { char: "D", name: "Текст D" }, { char: "E", name: "Текст E" }, { char: "F", name: "Текст F" }, { char: "G", name: "Текст G" }
+      ],
+      en: [
+        { char: "A", name: "Text A" }, { char: "B", name: "Text B" }, { char: "C", name: "Text C" },
+        { char: "D", name: "Text D" }, { char: "E", name: "Text E" }, { char: "F", name: "Text F" }, { char: "G", name: "Text G" }
+      ]
+    },
+    matchQuotes: [
+      { num: 1, text: "No logran encontrar empleo" },
+      { num: 2, text: "Adoptan prácticas más sanas" },
+      { num: 3, text: "Trabajo de investigación gubernamental" },
+      { num: 4, text: "Reducción de ciudadanos jóvenes" },
+      { num: 5, text: "Espacio de trabajo más favorable" },
+      { num: 6, text: "Generación sin llaves" },
+      { num: 7, text: "Actitud frente al cambio climático" },
+      { num: 8, text: "Interés en seguir estudiando" }
+    ],
+    ru: {
+      text: "Установите соответствие между текстами A–G и заголовками 1–8. Один заголовок лишний. Запишите последовательность цифр без пробелов.",
+      info: "Задание 10. Максимум 3 балла. Каждая ошибка уменьшает балл на 1, но не ниже 0. Если символов больше 7 — 0 баллов.",
+      explanation: "Ключ ФИПИ: A-5, B-4, C-3, D-6, E-8, F-1, G-2. Лишний заголовок — 7. Ответ: 5436812.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 10."
+    },
+    en: {
+      text: "Match texts A–G with headings 1–8. One heading is extra. Write the sequence of digits without spaces.",
+      info: "Task 10. Max 3 points. Each error reduces the score by 1, but not below 0. If more than 7 characters — 0 points.",
+      explanation: "FIPI key: A-5, B-4, C-3, D-6, E-8, F-1, G-2. Extra heading — 7. Answer: 5436812.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 10."
+    }},
+
+  { n: 11, topic: "read", scoringType: "strict-partial", accepted: ["624571"], answer: "624571",
+    base: { ru: TEXT_READ_11, en: TEXT_READ_11 },
+    matchOptions: {
+      ru: [
+        { char: "A", name: "Пропуск A" }, { char: "B", name: "Пропуск B" }, { char: "C", name: "Пропуск C" },
+        { char: "D", name: "Пропуск D" }, { char: "E", name: "Пропуск E" }, { char: "F", name: "Пропуск F" }
+      ],
+      en: [
+        { char: "A", name: "Gap A" }, { char: "B", name: "Gap B" }, { char: "C", name: "Gap C" },
+        { char: "D", name: "Gap D" }, { char: "E", name: "Gap E" }, { char: "F", name: "Gap F" }
+      ]
+    },
+    matchQuotes: [
+      { num: 1, text: "con la presencia de personal sanitario" },
+      { num: 2, text: "llevado a cabo en centros escolares" },
+      { num: 3, text: "fomentar la práctica de actividad física" },
+      { num: 4, text: "a crear una rutina de vida activa" },
+      { num: 5, text: "en cuenta el rango de edad" },
+      { num: 6, text: "con la instrucción académica y filosófica" },
+      { num: 7, text: "adecuado para la práctica de" }
+    ],
+    ru: {
+      text: "Заполните пропуски A–F частями предложений 1–7. Одна часть лишняя. Запишите последовательность цифр без пробелов.",
+      info: "Задание 11. Максимум 2 балла. Каждая ошибка уменьшает балл на 1, но не ниже 0. Если символов больше 6 — 0 баллов.",
+      explanation: "Ключ ФИПИ: A-6, B-2, C-4, D-5, E-7, F-1. Лишняя часть — 3. Ответ: 624571.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 11."
+    },
+    en: {
+      text: "Fill gaps A–F with sentence parts 1–7. One part is extra. Write the sequence of digits without spaces.",
+      info: "Task 11. Max 2 points. Each error reduces the score by 1, but not below 0. If more than 6 characters — 0 points.",
+      explanation: "FIPI key: A-6, B-2, C-4, D-5, E-7, F-1. Extra part — 3. Answer: 624571.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 11."
+    }},
+
+  { n: 12, topic: "read", scoringType: "word", accepted: ["4"], answer: "4",
+    base: { ru: TEXT_READ_12, en: TEXT_READ_12 },
+    ru: {
+      text: "¿Por qué siempre se recuerda la época universitaria?\n\n1) Uno aprende a cocinar y compartir comida.\n2) Uno entiende que la juventud no volverá.\n3) En las universidades hay lugares comunes.\n4) En este periodo uno entabla amistades.",
+      info: "Задание 12. 1 балл. Прочитайте текст в задании 12.",
+      explanation: "Ключ ФИПИ: 4.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 12."
+    },
+    en: {
+      text: "¿Por qué siempre se recuerda la época universitaria?\n\n1) Uno aprende a cocinar y compartir comida.\n2) Uno entiende que la juventud no volverá.\n3) En las universidades hay lugares comunes.\n4) En este periodo uno entabla amistades.",
+      info: "Task 12. 1 point. Read the text in task 12.",
+      explanation: "FIPI key: 4.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 12."
+    }},
+
+  { n: 13, topic: "read", scoringType: "word", accepted: ["2"], answer: "2",
+    ru: {
+      text: "Helena Adentro es un restaurante especial para la autora porque...\n\n1) se encuentra en la localidad de Filandia (Quindío).\n2) allí trabaja Helena Sarria, su amiga de la universidad.\n3) allí se sirven las mejores empanadas y bebidas.\n4) tiene una bonita decoración de muchos colores.",
+      info: "Задание 13. 1 балл. См. текст в задании 12.",
+      explanation: "Ключ ФИПИ: 2.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 13."
+    },
+    en: {
+      text: "Helena Adentro es un restaurante especial para la autora porque...\n\n1) se encuentra en la localidad de Filandia (Quindío).\n2) allí trabaja Helena Sarria, su amiga de la universidad.\n3) allí se sirven las mejores empanadas y bebidas.\n4) tiene una bonita decoración de muchos colores.",
+      info: "Task 13. 1 point. See the text in task 12.",
+      explanation: "FIPI key: 2.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 13."
+    }},
+
+  { n: 14, topic: "read", scoringType: "word", accepted: ["1"], answer: "1",
+    ru: {
+      text: "La frase «se encuentran a la perfección» en el tercer párrafo significa que los ingredientes...\n\n1) combinan completamente.\n2) se consiguen fácilmente.\n3) se utilizan razonablemente.\n4) mejoran significativamente.",
+      info: "Задание 14. 1 балл. См. текст в задании 12.",
+      explanation: "Ключ ФИПИ: 1.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 14."
+    },
+    en: {
+      text: "La frase «se encuentran a la perfección» en el tercer párrafo significa que los ingredientes...\n\n1) combinan completamente.\n2) se consiguen fácilmente.\n3) se utilizan razonablemente.\n4) mejoran significativamente.",
+      info: "Task 14. 1 point. See the text in task 12.",
+      explanation: "FIPI key: 1.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 14."
+    }},
+
+  { n: 15, topic: "read", scoringType: "word", accepted: ["1"], answer: "1",
+    ru: {
+      text: "¿Cuál de estas afirmaciones NO corresponde a la información del texto?\n\n1) Alejandro, socio de Helena, es neozelandés.\n2) Jade lleva unos años viviendo en Colombia.\n3) Helena Adentro pertenece a tres socios.\n4) A Jade le encantan los alimentos colombianos.",
+      info: "Задание 15. 1 балл. См. текст в задании 12.",
+      explanation: "Ключ ФИПИ: 1. Neozelandesa es Jade, no Alejandro.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 15."
+    },
+    en: {
+      text: "¿Cuál de estas afirmaciones NO corresponde a la información del texto?\n\n1) Alejandro, socio de Helena, es neozelandés.\n2) Jade lleva unos años viviendo en Colombia.\n3) Helena Adentro pertenece a tres socios.\n4) A Jade le encantan los alimentos colombianos.",
+      info: "Task 15. 1 point. See the text in task 12.",
+      explanation: "FIPI key: 1. Jade is from New Zealand, not Alejandro.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 15."
+    }},
+
+  { n: 16, topic: "read", scoringType: "word", accepted: ["2"], answer: "2",
+    ru: {
+      text: "¿Por qué para la autora la torta de pan fue un plato especial?\n\n1) Fue un postre de maíz para compartir.\n2) Al probar la tarta, se acordó de su abuela.\n3) Le asombró que no estuviera congelada.\n4) Fue una especialidad preparada por Helena.",
+      info: "Задание 16. 1 балл. См. текст в задании 12.",
+      explanation: "Ключ ФИПИ: 2.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 16."
+    },
+    en: {
+      text: "¿Por qué para la autora la torta de pan fue un plato especial?\n\n1) Fue un postre de maíz para compartir.\n2) Al probar la tarta, se acordó de su abuela.\n3) Le asombró que no estuviera congelada.\n4) Fue una especialidad preparada por Helena.",
+      info: "Task 16. 1 point. See the text in task 12.",
+      explanation: "FIPI key: 2.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 16."
+    }},
+
+  { n: 17, topic: "read", scoringType: "word", accepted: ["3"], answer: "3",
+    ru: {
+      text: "El Eje Cafetero es una región que destaca por...\n\n1) contar con los mejores restaurantes.\n2) una gran variedad de paisajes naturales.\n3) la calidad del café que se obtiene allí.\n4) viajes gastronómicos emblemáticos.",
+      info: "Задание 17. 1 балл. См. текст в задании 12.",
+      explanation: "Ключ ФИПИ: 3.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 17."
+    },
+    en: {
+      text: "El Eje Cafetero es una región que destaca por...\n\n1) contar con los mejores restaurantes.\n2) una gran variedad de paisajes naturales.\n3) la calidad del café que se obtiene allí.\n4) viajes gastronómicos emblemáticos.",
+      info: "Task 17. 1 point. See the text in task 12.",
+      explanation: "FIPI key: 3.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 17."
+    }},
+
+  { n: 18, topic: "read", scoringType: "word", accepted: ["2"], answer: "2",
+    ru: {
+      text: "La autora cree que el nombre de Helena Adentro...\n\n1) está relacionado con los años universitarios de Helena.\n2) dice que es más que un simple restaurante con platos.\n3) proviene del nombre y apellido de su propietaria.\n4) indica la dirección hacia el pueblo para visitar.",
+      info: "Задание 18. 1 балл. См. текст в задании 12.",
+      explanation: "Ключ ФИПИ: 2.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 18."
+    },
+    en: {
+      text: "La autora cree que el nombre de Helena Adentro...\n\n1) está relacionado con los años universitarios de Helena.\n2) dice que es más que un simple restaurante con platos.\n3) proviene del nombre y apellido de su propietaria.\n4) indica la dirección hacia el pueblo para visitar.",
+      info: "Task 18. 1 point. See the text in task 12.",
+      explanation: "FIPI key: 2.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 18."
+    }},
+
+  { n: 19, topic: "gram", scoringType: "word", accepted: ["se había enamorado", "he soñado"], answer: "se había enamorado / he soñado",
+    base: {
+      ru: "В демоверсии для заданий 19–24 предложены два альтернативных текста. Выберите один из них и выполните задания 19–24.\n\n" + TEXT_GRAMMAR_19_ES,
+      en: "The demo offers two alternative texts for tasks 19–24. Choose one text and complete tasks 19–24.\n\n" + TEXT_GRAMMAR_19_ES
+    },
+    ru: { text: "Задание 19. Преобразуйте слово так, чтобы оно грамматически соответствовало выбранному тексту.", info: "1 балл. В бланке ответ записывается без пробелов и знаков препинания.", explanation: "Вариант 1: se había enamorado. Вариант 2: he soñado.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задания 19–24." },
+    en: { text: "Task 19. Transform the word to fit the chosen text grammatically.", info: "1 point. In the answer form, write without spaces or punctuation.", explanation: "Variant 1: se había enamorado. Variant 2: he soñado.", source: "FIPI, Spanish EGE-2027 written demo, tasks 19–24." }},
+
+  { n: 20, topic: "gram", scoringType: "word", accepted: ["se casaba", "contempló"], answer: "se casaba / contempló",
+    ru: { text: "Задание 20. Преобразуйте слово так, чтобы оно грамматически соответствовало выбранному тексту. См. текст в задании 19.", info: "1 балл.", explanation: "Вариант 1: se casaba. Вариант 2: contempló.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задания 19–24." },
+    en: { text: "Task 20. Transform the word to fit the chosen text grammatically. See the text in task 19.", info: "1 point.", explanation: "Variant 1: se casaba. Variant 2: contempló.", source: "FIPI, Spanish EGE-2027 written demo, tasks 19–24." }},
+
+  { n: 21, topic: "gram", scoringType: "word", accepted: ["den", "sal"], answer: "den / sal",
+    ru: { text: "Задание 21. Преобразуйте слово так, чтобы оно грамматически соответствовало выбранному тексту. См. текст в задании 19.", info: "1 балл.", explanation: "Вариант 1: den. Вариант 2: sal.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задания 19–24." },
+    en: { text: "Task 21. Transform the word to fit the chosen text grammatically. See the text in task 19.", info: "1 point.", explanation: "Variant 1: den. Variant 2: sal.", source: "FIPI, Spanish EGE-2027 written demo, tasks 19–24." }},
+
+  { n: 22, topic: "gram", scoringType: "word", accepted: ["sé", "gustaba"], answer: "sé / gustaba",
+    ru: { text: "Задание 22. Преобразуйте слово так, чтобы оно грамматически соответствовало выбранному тексту. См. текст в задании 19.", info: "1 балл.", explanation: "Вариант 1: sé. Вариант 2: gustaba.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задания 19–24." },
+    en: { text: "Task 22. Transform the word to fit the chosen text grammatically. See the text in task 19.", info: "1 point.", explanation: "Variant 1: sé. Variant 2: gustaba.", source: "FIPI, Spanish EGE-2027 written demo, tasks 19–24." }},
+
+  { n: 23, topic: "gram", scoringType: "word", accepted: ["lo", "mejores"], answer: "lo / mejores",
+    ru: { text: "Задание 23. Преобразуйте слово так, чтобы оно грамматически соответствовало выбранному тексту. См. текст в задании 19.", info: "1 балл.", explanation: "Вариант 1: lo. Вариант 2: mejores.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задания 19–24." },
+    en: { text: "Task 23. Transform the word to fit the chosen text grammatically. See the text in task 19.", info: "1 point.", explanation: "Variant 1: lo. Variant 2: mejores.", source: "FIPI, Spanish EGE-2027 written demo, tasks 19–24." }},
+
+  { n: 24, topic: "gram", scoringType: "word", accepted: ["huyó", "mí"], answer: "huyó / mí",
+    ru: { text: "Задание 24. Преобразуйте слово так, чтобы оно грамматически соответствовало выбранному тексту. См. текст в задании 19.", info: "1 балл.", explanation: "Вариант 1: huyó. Вариант 2: mí.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задания 19–24." },
+    en: { text: "Task 24. Transform the word to fit the chosen text grammatically. See the text in task 19.", info: "1 point.", explanation: "Variant 1: huyó. Variant 2: mí.", source: "FIPI, Spanish EGE-2027 written demo, tasks 19–24." }},
+
+  { n: 25, topic: "gram", scoringType: "word", accepted: ["ejercicio"], answer: "ejercicio",
+    base: { ru: TEXT_GRAMMAR_25, en: TEXT_GRAMMAR_25 },
+    ru: { text: "Задание 25. Образуйте однокоренное слово от EJERCER.", info: "1 балл. Словообразование.", explanation: "Ключ ФИПИ: ejercicio.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 25." },
+    en: { text: "Task 25. Form a related word from EJERCER.", info: "1 point. Word formation.", explanation: "FIPI key: ejercicio.", source: "FIPI, Spanish EGE-2027 written demo, task 25." }},
+
+  { n: 26, topic: "gram", scoringType: "word", accepted: ["beneficioso"], answer: "beneficioso",
+    ru: { text: "Задание 26. Образуйте однокоренное слово от BENEFICIO. См. текст в задании 25.", info: "1 балл.", explanation: "Ключ ФИПИ: beneficioso.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 26." },
+    en: { text: "Task 26. Form a related word from BENEFICIO. See the text in task 25.", info: "1 point.", explanation: "FIPI key: beneficioso.", source: "FIPI, Spanish EGE-2027 written demo, task 26." }},
+
+  { n: 27, topic: "gram", scoringType: "word", accepted: ["agilidad"], answer: "agilidad",
+    ru: { text: "Задание 27. Образуйте однокоренное слово от ÁGIL. См. текст в задании 25.", info: "1 балл.", explanation: "Ключ ФИПИ: agilidad.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 27." },
+    en: { text: "Task 27. Form a related word from ÁGIL. See the text in task 25.", info: "1 point.", explanation: "FIPI key: agilidad.", source: "FIPI, Spanish EGE-2027 written demo, task 27." }},
+
+  { n: 28, topic: "gram", scoringType: "word", accepted: ["prevenir"], answer: "prevenir",
+    ru: { text: "Задание 28. Образуйте однокоренное слово от VENIR. См. текст в задании 25.", info: "1 балл.", explanation: "Ключ ФИПИ: prevenir.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 28." },
+    en: { text: "Task 28. Form a related word from VENIR. See the text in task 25.", info: "1 point.", explanation: "FIPI key: prevenir.", source: "FIPI, Spanish EGE-2027 written demo, task 28." }},
+
+  { n: 29, topic: "gram", scoringType: "word", accepted: ["mundialmente"], answer: "mundialmente",
+    ru: { text: "Задание 29. Образуйте однокоренное слово от MUNDIAL. См. текст в задании 25.", info: "1 балл.", explanation: "Ключ ФИПИ: mundialmente.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 29." },
+    en: { text: "Task 29. Form a related word from MUNDIAL. See the text in task 25.", info: "1 point.", explanation: "FIPI key: mundialmente.", source: "FIPI, Spanish EGE-2027 written demo, task 29." }},
+
+  { n: 30, topic: "gram", scoringType: "word", accepted: ["3"], answer: "3",
+    base: { ru: TEXT_GRAMMAR_30, en: TEXT_GRAMMAR_30 },
+    ru: { text: "Desde 30 ______ los astrónomos saben calcular cuándo tendrán lugar los eclipses...\n\n1) años\n2) días\n3) antaño\n4) meses", info: "Задание 30. 1 балл. Лексика в тексте.", explanation: "Ключ ФИПИ: 3.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 30." },
+    en: { text: "Desde 30 ______ los astrónomos saben calcular cuándo tendrán lugar los eclipses...\n\n1) años\n2) días\n3) antaño\n4) meses", info: "Task 30. 1 point. Vocabulary in text.", explanation: "FIPI key: 3.", source: "FIPI, Spanish EGE-2027 written demo, task 30." }},
+
+  { n: 31, topic: "gram", scoringType: "word", accepted: ["3"], answer: "3",
+    ru: { text: "Temiendo 31 ______ el hambre como el conflicto...\n\n1) tal\n2) tantos\n3) tanto\n4) tan", info: "Задание 31. 1 балл. См. текст в задании 30.", explanation: "Ключ ФИПИ: 3.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 31." },
+    en: { text: "Temiendo 31 ______ el hambre como el conflicto...\n\n1) tal\n2) tantos\n3) tanto\n4) tan", info: "Task 31. 1 point. See the text in task 30.", explanation: "FIPI key: 3.", source: "FIPI, Spanish EGE-2027 written demo, task 31." }},
+
+  { n: 32, topic: "gram", scoringType: "word", accepted: ["4"], answer: "4",
+    ru: { text: "Pero algunos miembros de la tripulación 32 ______ y huyeron a la isla.\n\n1) se mutilaron\n2) se movieron\n3) se amontaron\n4) se amotinaron", info: "Задание 32. 1 балл. См. текст в задании 30.", explanation: "Ключ ФИПИ: 4.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 32." },
+    en: { text: "Pero algunos miembros de la tripulación 32 ______ y huyeron a la isla.\n\n1) se mutilaron\n2) se movieron\n3) se amontaron\n4) se amotinaron", info: "Task 32. 1 point. See the text in task 30.", explanation: "FIPI key: 4.", source: "FIPI, Spanish EGE-2027 written demo, task 32." }},
+
+  { n: 33, topic: "gram", scoringType: "word", accepted: ["4"], answer: "4",
+    ru: { text: "La tolerancia dio paso al odio, y el comercio de alimentos 33 ______.\n\n1) se mantuvo\n2) se pasó\n3) se puso\n4) se detuvo", info: "Задание 33. 1 балл. См. текст в задании 30.", explanation: "Ключ ФИПИ: 4.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 33." },
+    en: { text: "La tolerancia dio paso al odio, y el comercio de alimentos 33 ______.\n\n1) se mantuvo\n2) se pasó\n3) se puso\n4) se detuvo", info: "Task 33. 1 point. See the text in task 30.", explanation: "FIPI key: 4.", source: "FIPI, Spanish EGE-2027 written demo, task 33." }},
+
+  { n: 34, topic: "gram", scoringType: "word", accepted: ["2"], answer: "2",
+    ru: { text: "Colón y la tripulación restante se quedaron al 34 ______ del hambre y la desesperación.\n\n1) extremo\n2) borde\n3) punto\n4) umbral", info: "Задание 34. 1 балл. См. текст в задании 30.", explanation: "Ключ ФИПИ: 2.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 34." },
+    en: { text: "Colón y la tripulación restante se quedaron al 34 ______ del hambre y la desesperación.\n\n1) extremo\n2) borde\n3) punto\n4) umbral", info: "Task 34. 1 point. See the text in task 30.", explanation: "FIPI key: 2.", source: "FIPI, Spanish EGE-2027 written demo, task 34." }},
+
+  { n: 35, topic: "gram", scoringType: "word", accepted: ["1"], answer: "1",
+    ru: { text: "...en testimonio de los 35 ______ que les serán enviados desde los cielos.\n\n1) males\n2) malentendidos\n3) malos\n4) malicias", info: "Задание 35. 1 балл. См. текст в задании 30.", explanation: "Ключ ФИПИ: 1.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 35." },
+    en: { text: "...en testimonio de los 35 ______ que les serán enviados desde los cielos.\n\n1) males\n2) malentendidos\n3) malos\n4) malicias", info: "Task 35. 1 point. See the text in task 30.", explanation: "FIPI key: 1.", source: "FIPI, Spanish EGE-2027 written demo, task 35." }},
+
+  { n: 36, topic: "gram", scoringType: "word", accepted: ["3"], answer: "3",
+    ru: { text: "Con las provisiones donadas 36 ______ los indios Cristóbal Colón regresó felizmente de su último viaje.\n\n1) de\n2) con\n3) por\n4) bajo", info: "Задание 36. 1 балл. См. текст в задании 30.", explanation: "Ключ ФИПИ: 3.", source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 36." },
+    en: { text: "Con las provisiones donadas 36 ______ los indios Cristóbal Colón regresó felizmente de su último viaje.\n\n1) de\n2) con\n3) por\n4) bajo", info: "Task 36. 1 point. See the text in task 30.", explanation: "FIPI key: 3.", source: "FIPI, Spanish EGE-2027 written demo, task 36." }},
+
+  { n: 37, topic: "write", scoringType: "part2", accepted: [], answer: { ru: "См. ориентир и критерии ФИПИ", en: "See reference and FIPI criteria" },
+    ru: {
+      text: "Задание 37. Электронное письмо личного характера (100–140 слов).\n\nВы получили письмо от Clara:\n\nDe: clara@mail.es\nPara: amigoderusia@ege.ru\nAsunto: De la Victoria\n\n...Tengo que hacer un proyecto escolar sobre las fiestas nacionales de diferentes países y quería preguntarte algunas cosas. ¿El Día de la Victoria qué fiesta es y cuándo la celebráis? ¿Cómo se celebra esta fiesta en Rusia? ¿Qué hacéis ese día en vuestra familia? ...Mi padre y yo planeamos irnos a pescar...\n\nНапишите ответное письмо. В ответе:\n— ответьте на 3 вопроса Clara;\n— задайте 3 вопроса о её планах с отцом.\n\nПомните правила написания электронного письма личного характера.",
+      info: "6 баллов: К1 — 2, К2 — 2, К3 — 2.\nОбъём: 100–140 слов.\nМенее 90 слов — 0 баллов.\nБолее 154 слов — проверяются только первые 140 слов.",
+      explanation: "Ориентир (116 слов):\n\n¡Hola, Clara!\n\nMuchas gracias por tu correo. Me alegró mucho saber de ti y de tu proyecto sobre las fiestas nacionales.\n\nEl Día de la Victoria es una fiesta muy importante en Rusia. Se celebra el 9 de mayo. Ese día hay desfiles militares, conciertos y fuegos artificiales. La gente sale a la calle con flores y fotos de sus familiares veteranos.\n\nEn mi familia vemos el desfile por televisión, almorzamos juntos y por la tarde visitamos el monumento a los héroes. También llamamos a los abuelos para felicitarlos.\n\nMe encantó lo de la pesca. ¿Cuándo vais a ir? ¿A qué río van tu padre y tú? ¿Volveréis el mismo día?\n\nEscríbeme pronto.\n\nUn abrazo,\nAlex",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 37."
+    },
+    en: {
+      text: "Task 37. Personal email (100–140 words).\n\nYou received an email from Clara:\n\nDe: clara@mail.es\nPara: amigoderusia@ege.ru\nAsunto: De la Victoria\n\n...Tengo que hacer un proyecto escolar sobre las fiestas nacionales de diferentes países y quería preguntarte algunas cosas. ¿El Día de la Victoria qué fiesta es y cuándo la celebráis? ¿Cómo se celebra esta fiesta en Rusia? ¿Qué hacéis ese día en vuestra familia? ...Mi padre y yo planeamos irnos a pescar...\n\nWrite a reply. In your reply:\n— answer Clara's 3 questions;\n— ask 3 questions about her plans with her father.\n\nRemember the rules for writing a personal email.",
+      info: "6 points: K1 — 2, K2 — 2, K3 — 2.\nLength: 100–140 words.\nLess than 90 words — 0 points.\nMore than 154 words — only the first 140 words are checked.",
+      explanation: "Reference (116 words):\n\n¡Hola, Clara!\n\nMuchas gracias por tu correo. Me alegró mucho saber de ti y de tu proyecto sobre las fiestas nacionales.\n\nEl Día de la Victoria es una fiesta muy importante en Rusia. Se celebra el 9 de mayo. Ese día hay desfiles militares, conciertos y fuegos artificiales. La gente sale a la calle con flores y fotos de sus familiares veteranos.\n\nEn mi familia vemos el desfile por televisión, almorzamos juntos y por la tarde visitamos el monumento a los héroes. También llamamos a los abuelos para felicitarlos.\n\nMe encantó lo de la pesca. ¿Cuándo vais a ir? ¿A qué río van tu padre y tú? ¿Volveréis el mismo día?\n\nEscríbeme pronto.\n\nUn abrazo,\nAlex",
+      source: "FIPI, Spanish EGE-2027 written demo, task 37."
+    }},
+
+  { n: 38, topic: "write", scoringType: "part2", accepted: [], answer: { ru: "См. план и критерии ФИПИ", en: "See plan and FIPI criteria" },
+    ru: {
+      text: "Задание 38. Письменное высказывание с элементами рассуждения (200–250 слов). Выберите ОДНО: 38.1 или 38.2.\n\n38.1. Проект о жизни в больших городах Zetlandia. Таблица: «¿Qué se debe hacer para mejorar el modo de vida en las grandes ciudades, según su opinión?»\nMejorar la calidad del aire — 34 %\nReducir el nivel de ruido — 25 %\nPlantar más árboles — 22 %\nConstruir más carriles para bicicletas — 12 %\nDisminuir el número de coches — 7 %\n\nПлан:\n— введение по теме проекта;\n— выбрать и представить 2–3 факта;\n— сделать 1–2 сравнения и прокомментировать их;\n— указать проблему, связанную с жизнью в большом городе, и предложить решение;\n— сделать заключение с выражением и обоснованием своего мнения.\n\n38.2. Проект о поддержании контакта со старыми друзьями. Диаграмма: «¿Cuál es la principal razón por la que apenas mantienes contacto con tus viejos amigos?»\nЗначения представлены на круговой диаграмме в официальной демоверсии ФИПИ (PDF). Используйте данные диаграммы.\n\nПлан:\n— введение по теме проекта;\n— выбрать и представить 2–3 факта;\n— сделать 1–2 сравнения и прокомментировать их;\n— указать проблему, связанную с поддержанием контактов со старыми друзьями, и предложить решение;\n— сделать заключение с выражением и обоснованием своего мнения о том, нужно ли иметь много друзей.",
+      info: "14 баллов: К1 — 3, К2 — 3, К3 — 3, К4 — 3, К5 — 2.\nОбъём: 200–250 слов.\nМенее 180 слов — 0 баллов.\nБолее 275 слов — проверяются только первые 250 слов.\nБолее 30 % текстуальных совпадений с источником — 0 баллов по всему заданию.",
+      explanation: "Используйте план. Числительные пишите цифрами. Соблюдайте нейтральный стиль, абзацы и логические связки.",
+      source: "ФИПИ, демоверсия письменной части ЕГЭ-2027, задание 38."
+    },
+    en: {
+      text: "Task 38. Written statement with reasoning (200–250 words). Choose ONE: 38.1 or 38.2.\n\n38.1. Project on life in large cities of Zetlandia. Table: «¿Qué se debe hacer para mejorar el modo de vida en las grandes ciudades, según su opinión?»\nMejorar la calidad del aire — 34 %\nReducir el nivel de ruido — 25 %\nPlantar más árboles — 22 %\nConstruir más carriles para bicicletas — 12 %\nDisminuir el número de coches — 7 %\n\nPlan:\n— introduction to the project topic;\n— select and present 2–3 facts;\n— make 1–2 comparisons and comment on them;\n— indicate a problem related to life in a big city and propose a solution;\n— conclude by expressing and justifying your opinion.\n\n38.2. Project on staying in touch with old friends. Chart: «¿Cuál es la principal razón por la que apenas mantienes contacto con tus viejos amigos?»\nThe values are shown in the circular chart in the official FIPI demo PDF. Use the chart data.\n\nPlan:\n— introduction to the project topic;\n— select and present 2–3 facts;\n— make 1–2 comparisons and comment on them;\n— indicate a problem related to keeping in touch with old friends and propose a solution;\n— conclude by expressing and justifying your opinion on whether it is necessary to have many friends.",
+      info: "14 points: K1 — 3, K2 — 3, K3 — 3, K4 — 3, K5 — 2.\nLength: 200–250 words.\nLess than 180 words — 0 points.\nMore than 275 words — only the first 250 words are checked.\nMore than 30% textual matches with the source — 0 points for the whole task.",
+      explanation: "Follow the plan. Write numerals as digits. Keep a neutral style, paragraphs and logical connectors.",
+      source: "FIPI, Spanish EGE-2027 written demo, task 38."
+    }},
+
+  { n: 39, topic: "speak", scoringType: "part2", accepted: [], answer: { ru: "1 балл при не более 5 фонетических ошибках", en: "1 point if there are no more than 5 phonetic errors" },
+    base: { ru: TEXT_ORAL_39, en: TEXT_ORAL_39 },
+    ru: { text: "Устная часть, задание 1. Прочитайте текст вслух. Время на подготовку — 1,5 минуты.", info: "1 балл. Критерий: фонетическая сторона речи. Допускается не более 5 фонетических ошибок, в том числе 1–2 искажающие смысл.", explanation: "Читайте текст целиком, соблюдая интонацию, ударения и паузы.", source: "ФИПИ, демоверсия устной части ЕГЭ-2027, задание 1." },
+    en: { text: "Speaking, task 1. Read the text aloud. Preparation time — 1.5 minutes.", info: "1 point. Criterion: phonetic accuracy. No more than 5 phonetic errors, including 1–2 meaning-distorting errors.", explanation: "Read the entire text with correct intonation, stress and pauses.", source: "FIPI, Spanish EGE-2027 oral demo, task 1." }},
+
+  { n: 40, topic: "speak", scoringType: "part2", accepted: [], answer: { ru: "Максимум 4 балла", en: "Maximum 4 points" },
+    ru: { text: "Устная часть, задание 2. Вы решили присоединиться к клубу кулинарии «¡Enseñemos a todos a cocinar!». Задайте 4 прямых вопроса, чтобы узнать:\n\n1) actividades;\n2) horario;\n3) certificado al terminar el curso;\n4) precio del curso.", info: "4 балла — по 1 баллу за вопрос. Каждый вопрос должен быть прямым и грамматически оформленным.", explanation: "Ориентир:\n1) ¿Qué actividades ofrece el club?\n2) ¿Cuál es el horario de las clases?\n3) ¿Se entrega algún certificado al terminar el curso?\n4) ¿Cuánto cuesta el curso?", source: "ФИПИ, демоверсия устной части ЕГЭ-2027, задание 2." },
+    en: { text: "Speaking, task 2. You decided to join the cooking club «¡Enseñemos a todos a cocinar!». Ask 4 direct questions to find out:\n\n1) actividades;\n2) horario;\n3) certificado al terminar el curso;\n4) precio del curso.", info: "4 points — 1 point per question. Each question must be direct and grammatically correct.", explanation: "Reference:\n1) ¿Qué actividades ofrece el club?\n2) ¿Cuál es el horario de las clases?\n3) ¿Se entrega algún certificado al terminar el curso?\n4) ¿Cuánto cuesta el curso?", source: "FIPI, Spanish EGE-2027 oral demo, task 2." }},
+
+  { n: 41, topic: "speak", scoringType: "part2", accepted: [], answer: { ru: "Максимум 5 баллов", en: "Maximum 5 points" },
+    ru: { text: "Устная часть, задание 3. Интервью о спорте. Ответьте на 5 вопросов. Каждый ответ — 2–3 фразы.\n\n1) ¿Haces ejercicio todos los días?\n2) ¿Qué tipos de deporte te gustan más?\n3) ¿Practicabas algún deporte en la escuela o fuera de ella cuando eras niño?\n4) ¿Has participado alguna vez en una competición deportiva?\n5) ¿Cómo te sentirías si tu equipo favorito ganara un torneo importante?", info: "5 баллов — по 1 баллу за ответ. Ответ менее 2 фраз — 0 баллов за ответ.", explanation: "Стройте полные ответы: утверждение + пояснение + пример/оценка.", source: "ФИПИ, демоверсия устной части ЕГЭ-2027, задание 3." },
+    en: { text: "Speaking, task 3. Interview about sports. Answer 5 questions. Each answer — 2–3 phrases.\n\n1) ¿Haces ejercicio todos los días?\n2) ¿Qué tipos de deporte te gustan más?\n3) ¿Practicabas algún deporte en la escuela o fuera de ella cuando eras niño?\n4) ¿Has participado alguna vez en una competición deportiva?\n5) ¿Cómo te sentirías si tu equipo favorito ganara un torneo importante?", info: "5 points — 1 point per answer. An answer shorter than 2 phrases receives 0 points.", explanation: "Build full answers: statement + explanation + example/evaluation.", source: "FIPI, Spanish EGE-2027 oral demo, task 3." }},
+
+  { n: 42, topic: "speak", scoringType: "part2", accepted: [], answer: { ru: "Максимум 10 баллов", en: "Maximum 10 points" },
+    ru: { text: "Устная часть, задание 4. Проектная работа «Viajar solo o en grupo».\n\nВы нашли 2 фотографии для проекта. Оставьте голосовое сообщение другу (3 минуты, 12–15 фраз):\n• объясните выбор фотографий, кратко описав их и указав различия;\n• укажите достоинства (1–2) двух типов путешествий;\n• укажите недостатки (1–2) двух типов путешествий;\n• выразите мнение: какой тип путешествий вы предпочитаете и почему.\n\nВнимание: в официальной демоверсии используются конкретные фотографии. В текстовой версии тренажёра опишите их по материалам ФИПИ или используйте любые две иллюстрации к теме.", info: "10 баллов: К1 — 4, К2 — 3, К3 — 3. Объём: 12–15 фраз. 7 фраз и менее — 0 баллов.", explanation: "Обязательны обращение к другу, вступление, заключение, логические связки, сравнение фото, преимущества/недостатки и личное мнение.", source: "ФИПИ, демоверсия устной части ЕГЭ-2027, задание 4." },
+    en: { text: "Speaking, task 4. Project «Viajar solo o en grupo».\n\nYou found 2 photos for the project. Leave a voice message to your friend (3 minutes, 12–15 phrases):\n• explain your choice of photos, briefly describing them and pointing out differences;\n• mention 1–2 advantages of both types of travel;\n• mention 1–2 disadvantages of both types of travel;\n• express your opinion: which type of travel you prefer and why.\n\nNote: the official demo uses specific photos. In this text-based trainer, describe them according to FIPI materials or use any two illustrations on the topic.", info: "10 points: K1 — 4, K2 — 3, K3 — 3. Length: 12–15 phrases. 7 phrases or fewer — 0 points.", explanation: "Address your friend, include introduction, conclusion, logical connectors, photo comparison, advantages/disadvantages and personal opinion.", source: "FIPI, Spanish EGE-2027 oral demo, task 4." }}
+];
+
+const CHECKLIST_ITEMS = {
+  ru: [
+    "Повторил правила чтения и произношения (r, rr, ñ, j, h, ll, y).",
+    "Отработал артикли, род и число существительных и прилагательных.",
+    "Повторил ser / estar / hay.",
+    "Отработал presente, pretérito indefinido, imperfecto, futuro simple, condicional simple.",
+    "Повторил pretérito perfecto и pluscuamperfecto.",
+    "Отработал presente de subjuntivo в придаточных.",
+    "Повторил модальные конструкции: tener que, hay que, ir a, acabar de, volver a.",
+    "Отработал местоимения: COD, COI, возвратные, притяжательные, указательные.",
+    "Повторил предлоги por / para, места, времени, направления.",
+    "Отработал сравнительные конструкции más / menos / tan... como.",
+    "Повторил словообразование: суффиксы -ción, -dad, -dor, -ista, -mente.",
+    "Отработал лексику по темам кодификатора.",
+    "Прорешал минимум 5 заданий Verdadero / Falso / No se menciona.",
+    "Прорешал минимум 5 заданий на соответствие (1, 10, 11).",
+    "Отработал аудирование: 6 высказываний, диалог, интервью.",
+    "Отработал чтение: заголовки, пропуски, полное понимание.",
+    "Написал минимум 3 электронных письма (100–140 слов).",
+    "Написал минимум 3 письменных высказывания (200–250 слов).",
+    "Отработал устную часть: чтение вслух, 4 вопроса, интервью, проект.",
+    "Прошёл полный пробник: 190 минут письменная часть + 17 минут устная.",
+    "Разобрал ошибки и составил план работы над слабыми темами."
+  ],
+  en: [
+    "Reviewed reading and pronunciation rules (r, rr, ñ, j, h, ll, y).",
+    "Practiced articles, gender, number of nouns and adjectives.",
+    "Reviewed ser / estar / hay.",
+    "Practiced presente, pretérito indefinido, imperfecto, futuro simple, condicional simple.",
+    "Reviewed pretérito perfecto and pluscuamperfecto.",
+    "Practiced presente de subjuntivo in subordinate clauses.",
+    "Reviewed modal constructions: tener que, hay que, ir a, acabar de, volver a.",
+    "Practiced pronouns: COD, COI, reflexive, possessive, demonstrative.",
+    "Reviewed prepositions por / para, place, time, direction.",
+    "Practiced comparatives más / menos / tan... como.",
+    "Reviewed word formation: suffixes -ción, -dad, -dor, -ista, -mente.",
+    "Practiced vocabulary from the codifier.",
+    "Solved at least 5 Verdadero / Falso / No se menciona tasks.",
+    "Solved at least 5 matching tasks (1, 10, 11).",
+    "Practiced listening: 6 statements, dialogue, interview.",
+    "Practiced reading: headings, gaps, full comprehension.",
+    "Wrote at least 3 emails (100–140 words).",
+    "Wrote at least 3 written statements (200–250 words).",
+    "Practiced speaking: reading aloud, 4 questions, interview, project.",
+    "Completed a full mock exam: 190 min written + 17 min oral.",
+    "Reviewed mistakes and made a plan for weak topics."
+  ]
+};
+
+const PLAN_DAYS = {
+  ru: [
+    "Диагностика: пробник 190 минут + устная часть.",
+    "Фонетика и правила чтения. Чтение вслух.",
+    "Артикли, род, число.",
+    "Ser / estar / hay. Presente, futuro simple.",
+    "Pretérito indefinido vs imperfecto.",
+    "Pretérito perfecto, pluscuamperfecto.",
+    "Condicional simple.",
+    "Presente de subjuntivo.",
+    "Модальные конструкции.",
+    "Местоимения COD, COI, возвратные.",
+    "Предлоги por / para.",
+    "Сравнительные конструкции.",
+    "Словообразование.",
+    "Лексика: семья, дом, повседневная жизнь.",
+    "Лексика: учёба, профессия.",
+    "Лексика: спорт, здоровье, еда.",
+    "Лексика: технологии, интернет, экология.",
+    "Лексика: культура Испании и Латинской Америки.",
+    "Аудирование: задание 1.",
+    "Аудирование: задание 2.",
+    "Аудирование: задания 3–9.",
+    "Чтение: задания 10–11.",
+    "Чтение: задания 12–18.",
+    "Грамматика 19–36 и письмо 37–38.",
+    "Устная часть 39–42. Пробник №2. Разбор ошибок."
+  ],
+  en: [
+    "Diagnostics: 190-min mock exam + oral part.",
+    "Phonetics and reading rules. Reading aloud.",
+    "Articles, gender, number.",
+    "Ser / estar / hay. Presente, futuro simple.",
+    "Pretérito indefinido vs imperfecto.",
+    "Pretérito perfecto, pluscuamperfecto.",
+    "Condicional simple.",
+    "Presente de subjuntivo.",
+    "Modal constructions.",
+    "Pronouns COD, COI, reflexive.",
+    "Prepositions por / para.",
+    "Comparatives.",
+    "Word formation.",
+    "Vocabulary: family, home, daily life.",
+    "Vocabulary: studies, profession.",
+    "Vocabulary: sports, health, food.",
+    "Vocabulary: technology, internet, ecology.",
+    "Vocabulary: culture of Spain and Latin America.",
+    "Listening: task 1.",
+    "Listening: task 2.",
+    "Listening: tasks 3–9.",
+    "Reading: tasks 10–11.",
+    "Reading: tasks 12–18.",
+    "Grammar 19–36 and writing 37–38.",
+    "Speaking 39–42. Mock exam #2. Review."
+  ]
+};
+
+function normalizeText(v) {
+  return String(v).trim().toLowerCase()
+    .replace(/ñ/g, "n")
+    .replace(/á/g, "a").replace(/é/g, "e").replace(/í/g, "i").replace(/ó/g, "o").replace(/ú/g, "u").replace(/ü/g, "u")
+    .replace(/ё/g, "е")
+    .replace(/[¿¡]/g, "")
+    .replace(/\s+/g, " ")
+    .replace(/[.,;:!?«»"'\-–—()]+/g, "");
+}
+
+function normalizeDigits(v) {
+  return String(v).replace(/[^0-9]/g, "");
+}
+
+function scoreStrictPartial(expected, input) {
+  const exp = String(expected || "");
+  const inp = String(input || "");
+  if (!exp) return { matches: 0, total: 0 };
+  let matches = 0;
+  for (let i = 0; i < exp.length; i++) {
+    if (inp[i] === exp[i]) matches++;
+  }
+  return { matches, total: exp.length };
+}
+
+function scoreWord(accepted, raw) {
+  const norm = normalizeText(raw);
+  const normNoSpaces = norm.replace(/\s+/g, "");
+  for (const a of accepted) {
+    const acc = normalizeText(a);
+    if (acc === norm) return true;
+    if (acc.replace(/\s+/g, "") === normNoSpaces) return true;
+  }
+  return false;
+}
+
+function truncateWords(raw, limit) {
+  return String(raw).trim().split(/\s+/).filter(Boolean).slice(0, limit).join(" ");
+}
+
+const PART2_GRADERS = {
+  37: function (raw) {
+    const allWords = raw.trim().split(/\s+/).filter(Boolean).length;
+    if (allWords < 90) return 0;
+    const checkedRaw = allWords > 154 ? truncateWords(raw, 140) : raw;
+    const checkedNorm = normalizeText(checkedRaw);
+
+    let s = 0;
+    if (/hola|estimad/i.test(checkedNorm)) s++;
+    if (/gracias|recib|correo/i.test(checkedNorm)) s++;
+    if (/victoria|9.*mayo|fiesta/i.test(checkedNorm)) s++;
+    if (/desfile|veterano|celebr/i.test(checkedNorm)) s++;
+    if (/pescar|padre|planes/i.test(checkedNorm)) s++;
+    if (/abrazo|saludo|hasta|escrib/i.test(checkedNorm)) s++;
+
+    return Math.min(s, 6);
+  },
+  38: function (raw) {
+    const allWords = raw.trim().split(/\s+/).filter(Boolean).length;
+    if (allWords < 180) return 0;
+    const checkedRaw = allWords > 275 ? truncateWords(raw, 250) : raw;
+    const checkedNorm = normalizeText(checkedRaw);
+
+    let s = 0;
+    if (/proyecto|tema/i.test(checkedNorm)) s++;
+    if (/encuesta|%|por ciento|tabla|grafico|diagrama/i.test(checkedNorm)) s++;
+    if (/problema|solucion|propongo/i.test(checkedNorm)) s++;
+    if (/conclusion|para concluir/i.test(checkedNorm)) s++;
+    if (/creo|opinion|pienso|prefer/i.test(checkedNorm)) s++;
+
+    return Math.min(s * 3, 14);
+  },
+  39: function (raw) {
+    return raw.trim().length > 20 ? 1 : 0;
+  },
+  40: function (raw, norm) {
+    let s = 0;
+    if (/actividades|clases|talleres/i.test(norm)) s++;
+    if (/horario|hora|cuando/i.test(norm)) s++;
+    if (/certificado|diploma/i.test(norm)) s++;
+    if (/precio|cuesta|costar|tarifa/i.test(norm)) s++;
+    return Math.min(s, 4);
+  },
+  41: function (raw, norm) {
+    const phrases = raw.split(/[.!?]+/).filter(x => x.trim().length > 5).length;
+    if (phrases < 10) return Math.min(Math.floor(phrases / 2), 5);
+    let s = 0;
+    if (/ejercicio|deporte|entrenar/i.test(norm)) s++;
+    if (/me gusta|prefiero|favorito/i.test(norm)) s++;
+    if (/escuela|nino|infancia/i.test(norm)) s++;
+    if (/competicion|torneo|campeonato/i.test(norm)) s++;
+    if (/sentir|orgullo|feliz|emocion/i.test(norm)) s++;
+    return Math.min(s, 5);
+  },
+  42: function (raw, norm) {
+    const phrases = raw.split(/[.!?]+/).filter(x => x.trim().length > 5).length;
+    if (phrases <= 7) return 0;
+    let s = 0;
+    if (/foto|imagen|proyecto/i.test(norm)) s++;
+    if (/grupo|solo|solitari/i.test(norm)) s++;
+    if (/ventaja|beneficio/i.test(norm)) s++;
+    if (/desventaja|problema|inconveniente/i.test(norm)) s++;
+    if (/prefiero|opinion|creo|pienso/i.test(norm)) s++;
+    let score = Math.min(s * 2, 10);
+    if (phrases >= 12) return score;
+    if (phrases >= 10) return Math.min(score, 7);
+    return Math.min(score, 4);
+  }
+};
+
+function scoreTask(task, raw) {
+  const max = WEIGHTS[task.n] || 1;
+  const text = String(raw || "").trim();
+  if (!text) return 0;
+  const norm = normalizeText(raw);
+  const inputDigits = normalizeDigits(raw);
+  const type = SCORING_TYPES[task.n] || task.scoringType;
+
+  switch (type) {
+    case "word":
+      return scoreWord(task.accepted, raw) ? max : 0;
+    case "strict":
+    case "strict-partial": {
+      const expected = task.accepted[0];
+      if (inputDigits.length !== expected.length) return 0;
+      const { matches, total } = scoreStrictPartial(expected, inputDigits);
+      const errors = total - matches;
+      const rawScore = max - errors;
+      return Math.max(Math.min(rawScore, max), 0);
+    }
+    case "part2": {
+      const g = PART2_GRADERS[task.n];
+      return g ? Math.min(g(raw, norm), max) : 0;
+    }
+    default:
+      return 0;
+  }
+}
+
+let savedAnswers = {};
+let checklistState = {};
+let currentFilter = "all";
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+}
+
+function scrollToId(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function topicClass(topic) {
+  if (topic === "listen") return "q-number listen";
+  if (topic === "read") return "q-number read";
+  if (topic === "gram") return "q-number gram";
+  if (topic === "write") return "q-number write";
+  return "q-number speak";
+}
+
+function topicLabel(topic) {
+  if (topic === "listen") return loc("topicListen");
+  if (topic === "read") return loc("topicRead");
+  if (topic === "gram") return loc("topicGram");
+  if (topic === "write") return loc("topicWrite");
+  return loc("topicSpeak");
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  applyFilter();
+}
+
+function applyFilter() {
+  QUIZ.forEach(q => {
+    const block = document.getElementById("q" + q.n);
+    if (!block) return;
+    block.style.display = (currentFilter === "all" || q.topic === currentFilter) ? "" : "none";
+  });
+
+  const listeningAudio = document.getElementById("listeningAudioSection");
+  const oralAudio = document.getElementById("oralAudioSection");
+
+  if (listeningAudio) {
+    listeningAudio.style.display = (currentFilter === "all" || currentFilter === "listen") ? "" : "none";
+  }
+  if (oralAudio) {
+    oralAudio.style.display = (currentFilter === "all" || currentFilter === "speak") ? "" : "none";
+  }
+}
+
+function updateFilterLabels() {
+  const counts = { listen: 0, read: 0, gram: 0, write: 0, speak: 0 };
+  QUIZ.forEach(q => counts[q.topic]++);
+  document.getElementById("filterAll").textContent = loc("filterAll") + " (" + QUIZ.length + ")";
+  document.getElementById("filterListen").textContent = loc("filterListen") + " (" + counts.listen + ")";
+  document.getElementById("filterRead").textContent = loc("filterRead") + " (" + counts.read + ")";
+  document.getElementById("filterGram").textContent = loc("filterGram") + " (" + counts.gram + ")";
+  document.getElementById("filterWrite").textContent = loc("filterWrite") + " (" + counts.write + ")";
+  document.getElementById("filterSpeak").textContent = loc("filterSpeak") + " (" + counts.speak + ")";
+}
+
+function applyUIText() {
+  const L = I18N[currentLang];
+  document.title = L.docTitle;
+  document.documentElement.lang = currentLang;
+  const meta = document.querySelector('meta[name="description"]');
+  if (meta && L.metaDesc) meta.setAttribute("content", L.metaDesc);
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const k = el.dataset.i18n;
+    if (L[k] != null) el.innerHTML = L[k];
+  });
+}
+
+function renderCards(id, cards) {
+  const g = document.getElementById(id);
+  g.innerHTML = "";
+  cards.forEach(c => {
+    const d = document.createElement("div");
+    d.className = "card " + (c.cls || "");
+    let h = '<span class="tag ' + (c.tagCls || "") + '">' + escapeHtml(c.tag) + "</span><h3>" + escapeHtml(c.title) + "</h3>";
+    if (c.list) h += '<ul class="mini-list">' + c.list.map(i => "<li>" + escapeHtml(i) + "</li>").join("") + "</ul>";
+    else if (c.text) h += "<p>" + escapeHtml(c.text) + "</p>";
+    d.innerHTML = h;
+    g.appendChild(d);
+  });
+}
+
+function renderChecklist() {
+  const ul = document.getElementById("checklistUl");
+  const items = CHECKLIST_ITEMS[currentLang];
+  ul.innerHTML = items.map((t, i) => {
+    const k = "ch" + (i + 1);
+    const ck = checklistState[k] ? "checked" : "";
+    const cl = checklistState[k] ? "done" : "";
+    return '<li class="check-item ' + cl + '"><input type="checkbox" id="' + k + '" data-key="' + k + '" ' + ck + ' /><label for="' + k + '">' + escapeHtml(t) + '</label></li>';
+  }).join("");
+}
+
+function renderPlan() {
+  const days = PLAN_DAYS[currentLang];
+  document.getElementById("planGrid").innerHTML = days.map((t, i) => {
+    const day = i + 1;
+    const critical = day === 1 || day === 14 || day === 19 || day === 23 || day === 25;
+    return '<div class="day ' + (critical ? "critical" : "") + '"><b>' + escapeHtml(loc("dayLabel")) + day + '</b>' + escapeHtml(t) + '</div>';
+  }).join("");
+}
+
+function renderQuiz() {
+  const container = document.getElementById("quizContainer");
+  container.innerHTML = "";
+
+  const audioSection = document.createElement("div");
+  audioSection.className = "audio-section";
+  audioSection.id = "listeningAudioSection";
+  audioSection.innerHTML =
+    '<span class="audio-section-tag">' + escapeHtml(loc("audioTag")) + '</span>' +
+    '<h3 class="audio-section-title">' + escapeHtml(loc("audioTitle")) + '<code>audio-es.mp3</code></h3>' +
+    '<p class="audio-section-note">' + escapeHtml(loc("audioNote")) + '</p>' +
+    '<div class="q-audio"><audio id="mainAudio" controls preload="metadata" src="audio-es.mp3"></audio></div>' +
+    '<div id="audioError" class="audio-error">' + escapeHtml(loc("audioError")) + '</div>' +
+    '<p style="margin:8px 0 0;color:var(--muted);font-size:13px;">' + escapeHtml(loc("audioTimerNote")) + '</p>';
+  container.appendChild(audioSection);
+
+  const audioEl = document.getElementById("mainAudio");
+  const errEl = document.getElementById("audioError");
+  if (audioEl) audioEl.addEventListener("error", () => { errEl.style.display = "block"; });
+
+  QUIZ.forEach(task => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    block.id = "q" + task.n;
+    const data = task[currentLang] || task.ru;
+    const type = SCORING_TYPES[task.n];
+    const isShort = type === "word" || type === "strict" || type === "strict-partial";
+    const baseText = locValue(task.base);
+    const matchOptions = locValue(task.matchOptions);
+    const matchQuotes = locValue(task.matchQuotes) || task.matchQuotes;
+
+    let html = "";
+    html += '<div class="' + topicClass(task.topic) + '">' + escapeHtml(topicLabel(task.topic)) + ' · ' + escapeHtml(loc("taskLabel")) + ' ' + task.n + '</div>';
+    html += '<div style="margin:0 0 14px;text-align:right;color:var(--muted);font-size:13px;">' + escapeHtml(loc("maxLabel")) + ' ' + WEIGHTS[task.n] + ' ' + escapeHtml(loc("pointsShort")) + '</div>';
+
+    if (baseText) {
+      html += '<details class="q-base"><summary>' + escapeHtml(loc("openBase")) + '</summary><div class="q-base-content">' + escapeHtml(baseText) + '</div></details>';
+    }
+
+    if (matchOptions && matchQuotes) {
+      html += '<div class="match-grid">';
+      html += '<div><h4>' + escapeHtml(loc("matchLeft")) + '</h4><ul>';
+      matchOptions.forEach(o => { html += '<li><b>' + escapeHtml(o.char) + ')</b> ' + escapeHtml(o.name) + '</li>'; });
+      html += '</ul></div>';
+      html += '<div><h4>' + escapeHtml(loc("matchRight")) + '</h4><ul>';
+      matchQuotes.forEach(q => { html += '<li><b>' + q.num + ')</b> ' + escapeHtml(q.text) + '</li>'; });
+      html += '</ul></div></div>';
+    }
+
+    html += '<div class="q-part"><span class="q-part-label">' + escapeHtml(loc("qLabel1")) + '</span>';
+    html += '<div class="q-text">' + escapeHtml(data.text) + '</div></div>';
+
+    html += '<div class="q-info"><span class="q-part-label" style="color:#d8ccff;">' + escapeHtml(loc("qLabel2")) + '</span>';
+    html += '<p style="margin:0;">' + escapeHtml(data.info) + '</p></div>';
+
+    html += '<div class="q-part"><span class="q-trainer-label">' + escapeHtml(loc("qLabel3")) + '</span>';
+    if (isShort) {
+      html += '<div class="answer-row">';
+      html += '<input id="input-' + task.n + '" class="answer-input" type="text" placeholder="' + escapeHtml(loc("placeholderShort")) + '" autocomplete="off" spellcheck="false" />';
+      html += '<button class="btn small" onclick="checkTask(' + task.n + ')">' + escapeHtml(loc("checkBtn")) + '</button>';
+      html += '</div>';
+    } else {
+      const isEssay = task.n === 37 || task.n === 38;
+      html += '<textarea id="input-' + task.n + '" class="answer-input' + (isEssay ? ' essay' : '') + '" placeholder="' + escapeHtml(loc("placeholderLong")) + '"></textarea>';
+      html += '<div class="answer-row" style="margin-top:10px;">';
+      html += '<span id="cc-' + task.n + '" style="color:var(--muted);font-size:13px;">0</span>';
+      html += '<button class="btn small" style="margin-left:auto;" onclick="checkTask(' + task.n + ')">' + escapeHtml(loc("checkBtn")) + '</button>';
+      html += '</div>';
+    }
+    html += '</div>';
+
+    html += '<div id="result-' + task.n + '"></div>';
+    block.innerHTML = html;
+    container.appendChild(block);
+  });
+
+  const oralSection = document.createElement("div");
+  oralSection.className = "audio-section oral";
+  oralSection.id = "oralAudioSection";
+  oralSection.innerHTML =
+    '<span class="audio-section-tag">' + escapeHtml(loc("oralTag")) + '</span>' +
+    '<h3 class="audio-section-title">' + escapeHtml(loc("oralTitle")) + '<code>audio-es-oral.mp3</code></h3>' +
+    '<p class="audio-section-note" style="color:#d8ccff;">' + escapeHtml(loc("oralNote")) + '</p>' +
+    '<div class="q-audio"><audio id="oralAudio" controls preload="metadata" src="audio-es-oral.mp3"></audio></div>' +
+    '<div id="oralAudioError" class="audio-error">' + escapeHtml(loc("oralError")) + '</div>';
+  container.appendChild(oralSection);
+
+  const oralEl = document.getElementById("oralAudio");
+  const oralErr = document.getElementById("oralAudioError");
+  if (oralEl) oralEl.addEventListener("error", () => { oralErr.style.display = "block"; });
+
+  restoreAnswers();
+  updateStats();
+  updateSummary();
+  updateFilterLabels();
+  applyFilter();
+}
+
+function restoreAnswers() {
+  QUIZ.forEach(task => {
+    const s = savedAnswers[task.n];
+    if (!s) return;
+    const inp = document.getElementById("input-" + task.n);
+    if (!inp) return;
+    inp.disabled = true;
+    inp.value = s.value;
+    inp.classList.remove("correct", "wrong", "partial");
+    if (s.score === s.max) inp.classList.add("correct");
+    else if (s.score > 0) inp.classList.add("partial");
+    else inp.classList.add("wrong");
+    showResult(task, s);
+  });
+}
+
+function checkTask(n) {
+  const task = QUIZ.find(q => q.n === n);
+  if (!task || savedAnswers[n]) return;
+  const inp = document.getElementById("input-" + n);
+  const raw = inp.value;
+  if (!String(raw).trim()) { alert(loc("enterAnswer")); return; }
+  const max = WEIGHTS[task.n] || 1;
+  const score = scoreTask(task, raw);
+  const saved = { value: raw, score: score, max: max, correct: score === max };
+  savedAnswers[n] = saved;
+  inp.disabled = true;
+  inp.classList.remove("correct", "wrong", "partial");
+  if (score === max) inp.classList.add("correct");
+  else if (score > 0) inp.classList.add("partial");
+  else inp.classList.add("wrong");
+  showResult(task, saved);
+  updateStats();
+  updateSummary();
+}
+
+function showResult(task, saved) {
+  const box = document.getElementById("result-" + task.n);
+  if (!box) return;
+  const data = task[currentLang] || task.ru;
+  const isMax = saved.score === saved.max;
+  const isPartial = saved.score > 0 && !isMax;
+  const vc = isMax ? "correct" : isPartial ? "partial" : "wrong";
+  const vt = isMax ? loc("correct") : isPartial ? loc("partial") : loc("wrong");
+  let extra = "";
+  if (task.topic === "write" || task.topic === "speak") {
+    extra = '<div class="source-row"><strong>' + escapeHtml(loc("part2Approx")) + '</strong></div>';
+  }
+  box.innerHTML =
+    '<div class="result-block ' + vc + '">' +
+      '<div class="verdict ' + vc + '">' + escapeHtml(vt) + '</div>' +
+      '<div class="result-row"><strong>' + escapeHtml(loc("correctAnswer")) + '</strong> ' + escapeHtml(locValue(task.answer) || loc("seeExplanation")) + '</div>' +
+      '<div class="result-row"><strong>' + escapeHtml(loc("pointsLabel")) + '</strong> ' + saved.score + ' / ' + saved.max + '</div>' +
+      '<div class="result-row"><strong>' + escapeHtml(loc("explanationLabel")) + '</strong> ' + escapeHtml(data.explanation) + '</div>' +
+      '<div class="source-row"><strong>' + escapeHtml(loc("sourceLabel")) + '</strong> ' + escapeHtml(data.source) + '</div>' +
+      extra +
+    '</div>';
+}
+
+function getStats() {
+  let answered = 0, correct = 0, score = 0, maxScore = 0;
+  QUIZ.forEach(t => {
+    const w = WEIGHTS[t.n] || 1;
+    maxScore += w;
+    const s = savedAnswers[t.n];
+    if (s) { answered++; score += s.score || 0; if (s.correct) correct++; }
+  });
+  return { total: TOTAL_TASKS, answered, correct, score, maxScore };
+}
+
+function getChecklistProgress() {
+  const inputs = document.querySelectorAll("#checklistUl input");
+  const total = inputs.length;
+  let done = 0;
+  inputs.forEach(i => { if (i.checked) done++; });
+  return total ? Math.round(done / total * 100) : 0;
+}
+
+function updateStats() {
+  const s = getStats();
+  document.getElementById("answeredCount").textContent = s.answered + "/" + s.total;
+  document.getElementById("correctCount").textContent = s.correct + "/" + s.total;
+  document.getElementById("checklistProgress").textContent = getChecklistProgress() + "%";
+  document.getElementById("overall").value = Math.round(((s.answered / s.total) * 100 + getChecklistProgress()) / 2);
+}
+
+function updateSummary() {
+  const s = getStats();
+  const box = document.getElementById("summaryBox");
+  const L = I18N[currentLang];
+  if (s.answered < s.total) {
+    box.innerHTML =
+      '<div class="summary">' +
+        '<p style="color:#9aa4c8;margin:0;">' + escapeHtml(L.passedBlocks) + ' <strong>' + s.answered + '</strong> ' + escapeHtml(L.of) + ' ' + s.total + '</p>' +
+        '<p style="color:#9aa4c8;margin:8px 0 0 0;">' + escapeHtml(L.correctInPart1) + ' <strong>' + s.correct + '</strong> ' + escapeHtml(L.of) + ' ' + s.total + '</p>' +
+        '<p style="color:#9aa4c8;margin:8px 0 0 0;">' + escapeHtml(L.primaryPart1) + ' <strong>' + s.score + '</strong> ' + escapeHtml(L.of) + ' ' + s.maxScore + '</p>' +
+        '<p style="color:#9aa4c8;margin:8px 0 0 0;font-size:14px;">' + escapeHtml(L.answerAllBlocks) + '</p>' +
+      '</div>';
+    return;
+  }
+  const pct = s.maxScore ? Math.round((s.score / s.maxScore) * 100) : 0;
+  const v = pct >= 85 ? L.verdictExcellent : pct >= 60 ? L.verdictGood : L.verdictNeed;
+  box.innerHTML =
+    '<div class="summary">' +
+      '<div class="score">' + s.score + '/' + s.maxScore + '</div>' +
+      '<p style="margin:8px 0;">' + escapeHtml(v) + '</p>' +
+      '<p style="color:#9aa4c8;margin:0;">' + escapeHtml(L.correctInPart1) + ' ' + pct + '%</p>' +
+      '<p class="note" style="margin-top:10px;">' + escapeHtml(L.noteSelfCheck) + '</p>' +
+    '</div>';
+}
+
+function resetAll() {
+  if (!confirm(loc("confirmReset"))) return;
+  savedAnswers = {};
+  checklistState = {};
+  renderChecklist();
+  renderPlan();
+  renderQuiz();
+}
+
+function copyPhone() {
+  const phone = "89202275676";
+  const status = document.getElementById("copyStatus");
+  const showCopied = () => { status.textContent = loc("copied"); setTimeout(() => { status.textContent = ""; }, 2500); };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(phone).then(showCopied).catch(() => fallbackCopy(phone, showCopied));
+  } else {
+    fallbackCopy(phone, showCopied);
+  }
+}
+
+function fallbackCopy(text, cb) {
+  const t = document.createElement("textarea");
+  t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
+  document.body.appendChild(t); t.focus(); t.select();
+  try { document.execCommand("copy"); cb(); } catch (e) { alert(loc("copyError") + text); }
+  document.body.removeChild(t);
+}
+
+let timerTotal = 190 * 60;
+let timerRemaining = timerTotal;
+let timerInterval = null;
+let timerRunning = false;
+
+function formatTime(s) {
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+  return [h, m, sec].map(v => String(v).padStart(2, "0")).join(":");
+}
+
+function updateTimerDisplay() {
+  document.getElementById("timerDisplay").textContent = formatTime(timerRemaining);
+  const w = document.getElementById("timerWidget");
+  w.classList.toggle("warning", timerRemaining <= 300 && timerRemaining > 60);
+  w.classList.toggle("danger", timerRemaining <= 60);
+}
+
+function updateTimerButton() {
+  document.getElementById("timerToggle").textContent = timerRunning ? "⏸" : "▶";
+}
+
+function stopTimer() {
+  timerRunning = false;
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+  updateTimerButton();
+}
+
+function startTimer() {
+  if (timerRunning || timerRemaining <= 0) return;
+  timerRunning = true;
+  timerInterval = setInterval(() => {
+    if (timerRemaining > 0) { timerRemaining--; updateTimerDisplay(); }
+    if (timerRemaining === 0) { stopTimer(); alert(loc("timeUp")); }
+  }, 1000);
+  updateTimerButton();
+}
+
+function toggleTimer() { timerRunning ? stopTimer() : startTimer(); }
+
+function resetTimer() { stopTimer(); timerRemaining = timerTotal; updateTimerDisplay(); }
+
+function updateTimerLabels() {
+  const p = document.getElementById("timerPreset");
+  const presets = [
+    { s: 190 * 60, l: loc("timerExam") },
+    { s: 30 * 60, l: loc("timerListening") },
+    { s: 60 * 60, l: loc("timerPractice") },
+    { s: 17 * 60, l: loc("timerOral") }
+  ];
+  const currentValue = p.value;
+  p.innerHTML = presets.map(x => '<option value="' + x.s + '">' + escapeHtml(x.l) + '</option>').join("");
+  if (presets.some(x => String(x.s) === currentValue)) p.value = currentValue;
+  else p.value = String(190 * 60);
+  timerTotal = parseInt(p.value, 10);
+  timerRemaining = timerTotal;
+  updateTimerButton();
+  updateTimerDisplay();
+}
+
+function renderAll() {
+  renderCards("structureGrid", STRUCTURE_CARDS[currentLang]);
+  renderCards("changesGrid", CHANGES_CARDS[currentLang]);
+  renderCards("criteriaGrid", CRITERIA_CARDS[currentLang]);
+  renderChecklist();
+  renderPlan();
+  renderQuiz();
+}
+
+function setLang(lang) {
+  if (lang === currentLang) return;
+  currentLang = lang;
+  document.querySelectorAll(".lang-option").forEach(sp => sp.classList.toggle("active", sp.dataset.lang === lang));
+  applyUIText();
+  renderAll();
+  updateTimerLabels();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  applyUIText();
+  renderAll();
+  updateTimerLabels();
+
+  document.getElementById("langToggle").addEventListener("click", () => setLang(currentLang === "ru" ? "en" : "ru"));
+  document.getElementById("timerToggle").addEventListener("click", toggleTimer);
+  document.getElementById("timerReset").addEventListener("click", resetTimer);
+  document.getElementById("timerPreset").addEventListener("change", e => {
+    timerTotal = parseInt(e.target.value, 10);
+    resetTimer();
+  });
+
+  document.getElementById("checklistUl").addEventListener("change", e => {
+    if (e.target.matches("input[type='checkbox']")) {
+      const k = e.target.dataset.key;
+      checklistState[k] = e.target.checked;
+      const li = e.target.closest(".check-item");
+      if (li) li.classList.toggle("done", e.target.checked);
+      updateStats();
+    }
+  });
+
+  document.addEventListener("input", e => {
+    if (e.target.matches("textarea[id^='input-']")) {
+      const n = e.target.id.replace("input-", "");
+      const cc = document.getElementById("cc-" + n);
+      if (cc) {
+        const words = e.target.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+        const task = QUIZ.find(q => q.n === +n);
+        let normMin = 0, normMax = 9999;
+        if (task && task.n === 37) { normMin = 100; normMax = 140; }
+        if (task && task.n === 38) { normMin = 200; normMax = 250; }
+        let color = "var(--muted)";
+        if (task && task.n >= 37 && task.n <= 38) {
+          if (words < normMin) color = "var(--red)";
+          else if (words > normMax) color = "var(--orange)";
+          else color = "var(--green)";
+        }
+        cc.innerHTML = escapeHtml(loc("wordsLabel")) + ' <strong style="color:' + color + '">' + words + '</strong>' +
+          (task && task.n >= 37 && task.n <= 38 ? ' (' + escapeHtml(loc("normLabel")) + ' ' + normMin + '–' + normMax + ')' : '');
+      }
+    }
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || e.shiftKey) return;
+    const a = document.activeElement;
+    if (!a || !a.classList.contains("answer-input")) return;
+    if (a.tagName === "TEXTAREA") return;
+    const m = a.id.match(/^input-(\d+)$/);
+    if (m) checkTask(parseInt(m[1], 10));
+  });
+});
+</script>
+</body>
+</html>
